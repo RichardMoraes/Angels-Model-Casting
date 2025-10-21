@@ -10,6 +10,7 @@ import {
 } from "react";
 import { TalentProfile } from "../types/TalentProfile";
 import { talentos } from "../data/talentos";
+import Header from "./Header";
 import TalentCard from "./TalentCard";
 import Filters from "./Filters";
 import Pagination from "./Pagination";
@@ -165,143 +166,154 @@ export default function CastingVitrine() {
   }, []);
 
   return (
-    <div className="space-y-6 sm:space-y-8">
-      {/* Filters Section */}
-      <div className="bg-white/70 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-slate-200/50 shadow-sm p-4 sm:p-6">
-        <Filters
-          searchTerm={searchTerm}
-          onSearchChange={handleSearchChange}
-          selectedGender={selectedGender}
-          onGenderChange={handleGenderChange}
-          selectedAgeRange={selectedAgeRange}
-          onAgeRangeChange={handleAgeRangeChange}
-          onClearFilters={handleClearFilters}
-        />
-      </div>
+    <div className="min-h-screen bg-slate-50">
+      {/* Professional Header */}
+      <Header
+        totalTalents={talentos.length}
+        filteredTalents={filteredTalents.length}
+      />
 
-      {/* Results Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-2 sm:space-x-3">
-          <div className="h-7 w-7 sm:h-8 sm:w-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-            <span className="text-white font-semibold text-xs sm:text-sm">
-              {filteredTalents.length}
-            </span>
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="space-y-6 sm:space-y-8">
+          {/* Filters Section */}
+          <div className="bg-white/70 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-slate-200/50 shadow-sm p-4 sm:p-6">
+            <Filters
+              searchTerm={searchTerm}
+              onSearchChange={handleSearchChange}
+              selectedGender={selectedGender}
+              onGenderChange={handleGenderChange}
+              selectedAgeRange={selectedAgeRange}
+              onAgeRangeChange={handleAgeRangeChange}
+              onClearFilters={handleClearFilters}
+            />
           </div>
-          <div>
-            <p className="text-base sm:text-lg font-semibold text-slate-900">
-              {filteredTalents.length} talentos encontrados
-            </p>
-            {totalPages > 1 && (
-              <p className="text-xs sm:text-sm text-slate-500">
-                Página {currentPage} de {totalPages}
+
+          {/* Results Header */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <div className="h-7 w-7 sm:h-8 sm:w-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-semibold text-xs sm:text-sm">
+                  {filteredTalents.length}
+                </span>
+              </div>
+              <div>
+                <p className="text-base sm:text-lg font-semibold text-slate-900">
+                  {filteredTalents.length} talentos encontrados
+                </p>
+                {totalPages > 1 && (
+                  <p className="text-xs sm:text-sm text-slate-500">
+                    Página {currentPage} de {totalPages}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Column Selector */}
+            <div className="flex items-center space-x-2">
+              <LayoutGrid className="h-4 w-4 text-slate-500" />
+              <Select
+                value={selectedColumns?.toString() || "auto"}
+                onValueChange={(value) => {
+                  if (value === "auto") {
+                    setSelectedColumns(null);
+                  } else {
+                    setSelectedColumns(Number.parseInt(value));
+                  }
+                }}
+              >
+                <SelectTrigger className="w-20 h-8 text-xs border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white/50 backdrop-blur-sm">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="rounded-lg border-slate-200">
+                  <SelectItem value="auto">Auto</SelectItem>
+                  <SelectItem value="1">1</SelectItem>
+                  <SelectItem value="2">2</SelectItem>
+                  <SelectItem value="3">3</SelectItem>
+                  <SelectItem value="4">4</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          {/* Talent Grid */}
+          {currentTalents.length > 0 ? (
+            <div className={`grid ${getGridClasses()} gap-4 sm:gap-6`}>
+              {currentTalents.map((talent, index) => (
+                <div
+                  key={talent.id}
+                  className="animate-in fade-in-0 slide-in-from-bottom-4 duration-500"
+                  style={{
+                    animationDelay: `${index * 100}ms`,
+                    animationFillMode: "both",
+                  }}
+                >
+                  <TalentCard talent={talent} onClick={handleTalentClick} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 sm:py-16">
+              <div className="mx-auto w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-r from-slate-100 to-slate-200 rounded-full flex items-center justify-center mb-4 sm:mb-6">
+                <svg
+                  className="w-10 h-10 sm:w-12 sm:h-12 text-slate-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
+                Nenhum talento encontrado
+              </h3>
+              <p className="text-sm sm:text-base text-slate-500 mb-4 sm:mb-6 px-4">
+                Tente ajustar os filtros para encontrar mais talentos.
               </p>
-            )}
-          </div>
-        </div>
+              <button
+                onClick={handleClearFilters}
+                className="px-4 sm:px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 font-medium text-sm sm:text-base"
+              >
+                Limpar filtros
+              </button>
+            </div>
+          )}
 
-        {/* Column Selector */}
-        <div className="flex items-center space-x-2">
-          <LayoutGrid className="h-4 w-4 text-slate-500" />
-          <Select
-            value={selectedColumns?.toString() || "auto"}
-            onValueChange={(value) => {
-              if (value === "auto") {
-                setSelectedColumns(null);
-              } else {
-                setSelectedColumns(Number.parseInt(value));
-              }
-            }}
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex justify-center pt-6 sm:pt-8">
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
+            </div>
+          )}
+
+          {/* Detail Sheet */}
+          <Suspense
+            fallback={
+              <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                <div className="bg-white rounded-lg p-6 animate-pulse">
+                  <div className="w-8 h-8 bg-slate-200 rounded-full mx-auto mb-4"></div>
+                  <div className="text-slate-600">Carregando detalhes...</div>
+                </div>
+              </div>
+            }
           >
-            <SelectTrigger className="w-20 h-8 text-xs border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white/50 backdrop-blur-sm">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent className="rounded-lg border-slate-200">
-              <SelectItem value="auto">Auto</SelectItem>
-              <SelectItem value="1">1</SelectItem>
-              <SelectItem value="2">2</SelectItem>
-              <SelectItem value="3">3</SelectItem>
-              <SelectItem value="4">4</SelectItem>
-            </SelectContent>
-          </Select>
+            <TalentDetailSheet
+              talent={selectedTalent}
+              isOpen={isDetailSheetOpen}
+              onClose={handleDetailSheetClose}
+            />
+          </Suspense>
         </div>
       </div>
-
-      {/* Talent Grid */}
-      {currentTalents.length > 0 ? (
-        <div className={`grid ${getGridClasses()} gap-4 sm:gap-6`}>
-          {currentTalents.map((talent, index) => (
-            <div
-              key={talent.id}
-              className="animate-in fade-in-0 slide-in-from-bottom-4 duration-500"
-              style={{
-                animationDelay: `${index * 100}ms`,
-                animationFillMode: "both",
-              }}
-            >
-              <TalentCard talent={talent} onClick={handleTalentClick} />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-12 sm:py-16">
-          <div className="mx-auto w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-r from-slate-100 to-slate-200 rounded-full flex items-center justify-center mb-4 sm:mb-6">
-            <svg
-              className="w-10 h-10 sm:w-12 sm:h-12 text-slate-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </div>
-          <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
-            Nenhum talento encontrado
-          </h3>
-          <p className="text-sm sm:text-base text-slate-500 mb-4 sm:mb-6 px-4">
-            Tente ajustar os filtros para encontrar mais talentos.
-          </p>
-          <button
-            onClick={handleClearFilters}
-            className="px-4 sm:px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 font-medium text-sm sm:text-base"
-          >
-            Limpar filtros
-          </button>
-        </div>
-      )}
-
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="flex justify-center pt-6 sm:pt-8">
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
-        </div>
-      )}
-
-      {/* Detail Sheet */}
-      <Suspense
-        fallback={
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 animate-pulse">
-              <div className="w-8 h-8 bg-slate-200 rounded-full mx-auto mb-4"></div>
-              <div className="text-slate-600">Carregando detalhes...</div>
-            </div>
-          </div>
-        }
-      >
-        <TalentDetailSheet
-          talent={selectedTalent}
-          isOpen={isDetailSheetOpen}
-          onClose={handleDetailSheetClose}
-        />
-      </Suspense>
     </div>
   );
 }

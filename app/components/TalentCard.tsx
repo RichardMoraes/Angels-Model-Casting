@@ -15,6 +15,17 @@ const TalentCard = memo(function TalentCard({
   onClick,
 }: TalentCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  // Fallback para imagem local se a externa falhar
+  const imageSrc = imageError 
+    ? `/api/placeholder/400/288?text=${encodeURIComponent(talent.name.charAt(0))}`
+    : talent.mainPhotoUrl;
+
+  const handleImageError = () => {
+    setImageError(true);
+    setImageLoaded(true);
+  };
 
   return (
     <Card
@@ -30,7 +41,7 @@ const TalentCard = memo(function TalentCard({
         )}
 
         <Image
-          src={talent.mainPhotoUrl}
+          src={imageSrc}
           alt={`Foto de ${talent.name}`}
           width={400}
           height={288}
@@ -40,6 +51,7 @@ const TalentCard = memo(function TalentCard({
           priority={false}
           loading="lazy"
           onLoad={() => setImageLoaded(true)}
+          onError={handleImageError}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <div className="absolute top-3 right-3 sm:top-4 sm:right-4">
