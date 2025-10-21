@@ -13,16 +13,16 @@ export default function Header({ totalTalents, filteredTalents }: HeaderProps) {
   const [isStatsMenuOpen, setIsStatsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 shadow-lg border-b border-purple-800/30">
+    <header className="bg-gradient-to-r from-purple-900 via-purple-800 to-purple-900 shadow-xl border-b border-white/20 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">V</span>
+              <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/30 shadow-md">
+                <span className="text-white font-bold text-lg">V</span>
               </div>
-              <h1 className="text-xl font-bold text-white">
+              <h1 className="text-2xl font-bold text-white tracking-tight">
                 Vitrine de Talentos
               </h1>
             </div>

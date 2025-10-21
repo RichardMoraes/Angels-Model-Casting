@@ -197,11 +197,11 @@ const AdvancedFilters = memo(function AdvancedFilters({
               {totalResults.toLocaleString()} elencos
             </span>
             
-            <Button className="h-8 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 rounded-lg font-medium flex items-center gap-2 whitespace-nowrap">
-              <Star className="h-4 w-4" />
-              <span className="hidden lg:inline">AZ Elenco Premium</span>
-              <span className="lg:hidden">Premium</span>
-            </Button>
+                    <Button className="h-8 bg-gradient-to-r from-purple-500 to-purple-600 hover:shadow-lg text-white px-4 rounded-lg font-medium flex items-center gap-2 whitespace-nowrap transition-all duration-300">
+                      <Star className="h-4 w-4" />
+                      <span className="hidden lg:inline">AZ Elenco Premium</span>
+                      <span className="lg:hidden">Premium</span>
+                    </Button>
           </div>
         </div>
 

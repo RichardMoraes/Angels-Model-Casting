@@ -244,18 +244,22 @@ export default function CastingVitrine() {
                 gridTemplateRows: 'repeat(auto-fit, minmax(500px, 1fr))'
               }}
             >
-              {currentTalents.map((talent, index) => (
-                <div
-                  key={talent.id}
-                  className="animate-in fade-in-0 slide-in-from-bottom-4 duration-500 h-full"
-                  style={{
-                    animationDelay: `${index * 100}ms`,
-                    animationFillMode: "both",
-                  }}
-                >
-                  <TalentCard talent={talent} onClick={handleTalentClick} />
-                </div>
-              ))}
+                      {currentTalents.map((talent, index) => (
+                        <div
+                          key={talent.id}
+                          className="animate-in fade-in-0 slide-in-from-bottom-4 duration-500 h-full"
+                          style={{
+                            animationDelay: `${index * 100}ms`,
+                            animationFillMode: "both",
+                          }}
+                        >
+                          <TalentCard 
+                            talent={talent} 
+                            onClick={handleTalentClick} 
+                            isPriority={index === 0}
+                          />
+                        </div>
+                      ))}
             </div>
           ) : (
             <div className="text-center py-12 sm:py-16">

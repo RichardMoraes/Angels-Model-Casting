@@ -68,13 +68,13 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
         <div className="relative bg-gradient-to-r from-slate-900 to-slate-700 text-white pt-16 pb-8 px-8">
           {/* Background Photo */}
           <div className="absolute inset-0 overflow-hidden">
-            <Image
-              src={talent.mainPhotoUrl}
-              alt={`Foto de ${talent.name}`}
-              fill
-              className="object-cover opacity-20"
-              priority
-            />
+                    <Image
+                      src={talent.mainPhotoUrl}
+                      alt={`Foto de ${talent.name}`}
+                      fill
+                      className="object-cover opacity-20"
+                      priority
+                    />
             <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-700/80"></div>
           </div>
           
@@ -84,13 +84,13 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
               {/* Profile Photo */}
                       <div className="shrink-0">
                 <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-white/30 shadow-xl">
-                  <Image
-                    src={talent.mainPhotoUrl}
-                    alt={`Foto de ${talent.name}`}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
+                        <Image
+                          src={talent.mainPhotoUrl}
+                          alt={`Foto de ${talent.name}`}
+                          fill
+                          className="object-cover"
+                          priority
+                        />
                 </div>
               </div>
               
@@ -244,19 +244,19 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                           <div className="w-8 h-8 bg-slate-300 rounded-full animate-pulse"></div>
                         </div>
                       )}
-                      <Image
-                        src={photo}
-                        alt={`${talent.name} - Foto ${index + 1}`}
-                        fill
-                        className={`object-cover rounded-lg transition-all duration-500 group-hover:scale-105 ${
-                          imageLoadedStates[`photo-${index}`]
-                            ? "opacity-100"
-                            : "opacity-0"
-                        }`}
-                        sizes="(max-width: 768px) 50vw, 33vw"
-                        loading="lazy"
-                        onLoad={() => handleImageLoad(`photo-${index}`)}
-                      />
+                              <Image
+                                src={photo}
+                                alt={`${talent.name} - Foto ${index + 1}`}
+                                fill
+                                className={`object-cover rounded-lg transition-all duration-500 group-hover:scale-105 ${
+                                  imageLoadedStates[`photo-${index}`]
+                                    ? "opacity-100"
+                                    : "opacity-0"
+                                }`}
+                                sizes="(max-width: 768px) 50vw, 33vw"
+                                loading="lazy"
+                                onLoad={() => handleImageLoad(`photo-${index}`)}
+                              />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100">
                         <Button variant="secondary" size="sm" className="bg-white/90 text-slate-900">
                           <Download className="w-4 h-4" />

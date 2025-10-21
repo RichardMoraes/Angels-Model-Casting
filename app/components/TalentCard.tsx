@@ -9,11 +9,13 @@ import { MapPin, Calendar, Ruler, Weight, Eye, User } from "lucide-react";
 interface TalentCardProps {
   readonly talent: TalentProfile;
   readonly onClick: (talent: TalentProfile) => void;
+  readonly isPriority?: boolean;
 }
 
 const TalentCard = memo(function TalentCard({
   talent,
   onClick,
+  isPriority = false,
 }: TalentCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -30,7 +32,7 @@ const TalentCard = memo(function TalentCard({
 
   return (
     <Card
-      className="group cursor-pointer hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-200/50 bg-white hover:border-slate-300 hover:-translate-y-1 hover:scale-[1.01] shadow-lg hover:shadow-slate-300/50 relative z-10 h-full flex flex-col"
+      className="group cursor-pointer hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-200/50 bg-white hover:border-purple-200 hover:-translate-y-2 hover:scale-[1.02] shadow-lg relative z-10 h-full flex flex-col"
       onClick={() => onClick(talent)}
     >
       {/* Image Section */}
@@ -42,19 +44,19 @@ const TalentCard = memo(function TalentCard({
           </div>
         )}
 
-        <Image
-          src={imageSrc}
-          alt={`Foto de ${talent.name}`}
-          width={400}
-          height={288}
-          className={`w-full h-full object-cover group-hover:scale-110 transition-all duration-700 ${
-            imageLoaded ? "opacity-100" : "opacity-0"
-          }`}
-          priority={false}
-          loading="lazy"
-          onLoad={() => setImageLoaded(true)}
-          onError={handleImageError}
-        />
+                <Image
+                  src={imageSrc}
+                  alt={`Foto de ${talent.name}`}
+                  width={400}
+                  height={288}
+                  className={`w-full h-full object-cover group-hover:scale-110 transition-all duration-700 ${
+                    imageLoaded ? "opacity-100" : "opacity-0"
+                  }`}
+                  priority={isPriority}
+                  loading={isPriority ? "eager" : "lazy"}
+                  onLoad={() => setImageLoaded(true)}
+                  onError={handleImageError}
+                />
         
         {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -87,9 +89,9 @@ const TalentCard = memo(function TalentCard({
           {/* Header */}
           <div className="flex items-start justify-between">
             <div className="flex-1 min-w-0">
-              <h3 className="font-bold text-xl text-slate-900 group-hover:text-blue-600 transition-colors duration-300 truncate">
-                {talent.name}
-              </h3>
+                      <h3 className="text-xl font-semibold text-slate-900 group-hover:text-purple-600 transition-colors duration-300 truncate">
+                        {talent.name}
+                      </h3>
               <div className="flex items-center gap-2 mt-2">
                 <Calendar className="w-4 h-4 text-slate-400" />
                 <span className="text-sm font-medium text-slate-600">
@@ -102,16 +104,16 @@ const TalentCard = memo(function TalentCard({
               </div>
             </div>
             
-            {/* Gender badge */}
-            <div className="ml-4 px-3 py-1.5 bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700 text-xs font-semibold rounded-full border border-blue-200/50 group-hover:from-blue-100 group-hover:to-purple-100 transition-all duration-300">
-              {(() => {
-                switch (talent.gender) {
-                  case "Female": return "Fem";
-                  case "Male": return "Masc";
-                  default: return "NB";
-                }
-              })()}
-            </div>
+                    {/* Gender badge */}
+                    <div className="ml-4 px-3 py-1.5 bg-purple-50 text-purple-700 text-xs font-semibold rounded-full border border-purple-200/50 group-hover:bg-purple-100 transition-colors duration-300">
+                      {(() => {
+                        switch (talent.gender) {
+                          case "Female": return "Fem";
+                          case "Male": return "Masc";
+                          default: return "NB";
+                        }
+                      })()}
+                    </div>
           </div>
 
           {/* Location */}
@@ -147,15 +149,15 @@ const TalentCard = memo(function TalentCard({
             <h4 className="text-sm font-semibold text-slate-700">Especialidades</h4>
             <div className="grid grid-cols-2 gap-2">
               {talent.skills.slice(0, 3).map((skill, index) => (
-                <span
-                  key={skill}
-                  className="px-3 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-semibold rounded-full shadow-sm group-hover:shadow-md transition-all duration-300 hover:scale-105 text-center truncate"
-                  style={{
-                    animationDelay: `${index * 100}ms`,
-                  }}
-                >
-                  {skill}
-                </span>
+                        <span
+                          key={skill}
+                          className="px-3 py-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white text-xs font-semibold rounded-full shadow-md group-hover:shadow-lg transition-all duration-300 hover:scale-105 text-center truncate"
+                          style={{
+                            animationDelay: `${index * 100}ms`,
+                          }}
+                        >
+                          {skill}
+                        </span>
               ))}
               {talent.skills.length > 3 && (
                 <span className="px-3 py-2 bg-slate-200 text-slate-600 text-xs font-semibold rounded-full group-hover:bg-slate-300 transition-colors duration-300 text-center">
