@@ -142,14 +142,14 @@ const TalentCard = memo(function TalentCard({
             </div>
           </div>
 
-          {/* Skills - Sempre no final */}
+          {/* Skills - Layout consistente */}
           <div className="space-y-3 mt-auto">
             <h4 className="text-sm font-semibold text-slate-700">Especialidades</h4>
-            <div className="flex flex-wrap gap-2.5">
+            <div className="grid grid-cols-2 gap-2">
               {talent.skills.slice(0, 3).map((skill, index) => (
                 <span
                   key={skill}
-                  className="px-3 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-semibold rounded-full shadow-sm group-hover:shadow-md transition-all duration-300 hover:scale-105"
+                  className="px-3 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-semibold rounded-full shadow-sm group-hover:shadow-md transition-all duration-300 hover:scale-105 text-center truncate"
                   style={{
                     animationDelay: `${index * 100}ms`,
                   }}
@@ -158,7 +158,7 @@ const TalentCard = memo(function TalentCard({
                 </span>
               ))}
               {talent.skills.length > 3 && (
-                <span className="px-3 py-2 bg-slate-200 text-slate-600 text-xs font-semibold rounded-full group-hover:bg-slate-300 transition-colors duration-300">
+                <span className="px-3 py-2 bg-slate-200 text-slate-600 text-xs font-semibold rounded-full group-hover:bg-slate-300 transition-colors duration-300 text-center">
                   +{talent.skills.length - 3}
                 </span>
               )}
