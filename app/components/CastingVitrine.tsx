@@ -12,7 +12,7 @@ import { TalentProfile } from "../types/TalentProfile";
 import { talentos } from "../data/talentos";
 import Header from "./Header";
 import TalentCard from "./TalentCard";
-import Filters from "./Filters";
+import AdvancedFilters from "./AdvancedFilters";
 import Pagination from "./Pagination";
 import {
   Select,
@@ -173,21 +173,21 @@ export default function CastingVitrine() {
         filteredTalents={filteredTalents.length}
       />
 
+      {/* Advanced Filters */}
+      <AdvancedFilters
+        searchTerm={searchTerm}
+        onSearchChange={handleSearchChange}
+        selectedGender={selectedGender}
+        onGenderChange={handleGenderChange}
+        selectedAgeRange={selectedAgeRange}
+        onAgeRangeChange={handleAgeRangeChange}
+        onClearFilters={handleClearFilters}
+        totalResults={filteredTalents.length}
+      />
+
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="space-y-6 sm:space-y-8">
-          {/* Filters Section */}
-          <div className="bg-white/70 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-slate-200/50 shadow-sm p-4 sm:p-6">
-            <Filters
-              searchTerm={searchTerm}
-              onSearchChange={handleSearchChange}
-              selectedGender={selectedGender}
-              onGenderChange={handleGenderChange}
-              selectedAgeRange={selectedAgeRange}
-              onAgeRangeChange={handleAgeRangeChange}
-              onClearFilters={handleClearFilters}
-            />
-          </div>
 
           {/* Results Header */}
           <div className="flex items-center justify-between">
