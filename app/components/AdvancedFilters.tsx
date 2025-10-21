@@ -51,10 +51,10 @@ const AdvancedFilters = memo(function AdvancedFilters({
         <div className="space-y-4">
           
           {/* First Row - Primary Search and Basic Filters */}
-          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
             
             {/* Main Search Input */}
-            <div className="relative flex-1 min-w-0">
+            <div className="relative sm:col-span-2 lg:col-span-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
               <Input
                 placeholder="Buscar por nome..."
@@ -68,18 +68,18 @@ const AdvancedFilters = memo(function AdvancedFilters({
             <div className="flex items-center gap-2">
               <Input
                 placeholder="De"
-                className="w-20 h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white text-center text-sm px-2"
+                className="w-16 sm:w-20 h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white text-center text-sm px-1 sm:px-2"
               />
-              <span className="text-slate-500 text-sm whitespace-nowrap">até</span>
+              <span className="text-slate-500 text-xs sm:text-sm whitespace-nowrap">até</span>
               <Input
                 placeholder="Até"
-                className="w-20 h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white text-center text-sm px-2"
+                className="w-16 sm:w-20 h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white text-center text-sm px-1 sm:px-2"
               />
             </div>
 
             {/* Gender Select */}
             <Select value={selectedGender} onValueChange={onGenderChange}>
-              <SelectTrigger className="w-32 h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white">
+              <SelectTrigger className="w-full h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white">
                 <SelectValue placeholder="Gênero" />
               </SelectTrigger>
               <SelectContent className="rounded-lg border-slate-200">
@@ -95,65 +95,63 @@ const AdvancedFilters = memo(function AdvancedFilters({
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
               <Input
                 placeholder="Busca Geral"
-                className="pl-10 w-40 h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white"
+                className="pl-10 w-full h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white"
               />
             </div>
           </div>
 
           {/* Second Row - Additional Filters */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
             
             {/* Additional Filters */}
-            <div className="flex flex-wrap items-center gap-3">
-              <Select>
-                <SelectTrigger className="w-28 h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white">
-                  <SelectValue placeholder="Etnia" />
-                </SelectTrigger>
-                <SelectContent className="rounded-lg border-slate-200">
-                  <SelectItem value="all">Todas</SelectItem>
-                  <SelectItem value="branca">Branca</SelectItem>
-                  <SelectItem value="negra">Negra</SelectItem>
-                  <SelectItem value="parda">Parda</SelectItem>
-                  <SelectItem value="asiatica">Asiática</SelectItem>
-                </SelectContent>
-              </Select>
+            <Select>
+              <SelectTrigger className="w-full h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white">
+                <SelectValue placeholder="Etnia" />
+              </SelectTrigger>
+              <SelectContent className="rounded-lg border-slate-200">
+                <SelectItem value="all">Todas</SelectItem>
+                <SelectItem value="branca">Branca</SelectItem>
+                <SelectItem value="negra">Negra</SelectItem>
+                <SelectItem value="parda">Parda</SelectItem>
+                <SelectItem value="asiatica">Asiática</SelectItem>
+              </SelectContent>
+            </Select>
 
-              <Select>
-                <SelectTrigger className="w-24 h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white">
-                  <SelectValue placeholder="DRT" />
-                </SelectTrigger>
-                <SelectContent className="rounded-lg border-slate-200">
-                  <SelectItem value="all">Todos</SelectItem>
-                  <SelectItem value="sim">Sim</SelectItem>
-                  <SelectItem value="nao">Não</SelectItem>
-                </SelectContent>
-              </Select>
+            <Select>
+              <SelectTrigger className="w-full h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white">
+                <SelectValue placeholder="DRT" />
+              </SelectTrigger>
+              <SelectContent className="rounded-lg border-slate-200">
+                <SelectItem value="all">Todos</SelectItem>
+                <SelectItem value="sim">Sim</SelectItem>
+                <SelectItem value="nao">Não</SelectItem>
+              </SelectContent>
+            </Select>
 
-              <Select>
-                <SelectTrigger className="w-28 h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white">
-                  <SelectValue placeholder="Atuação" />
-                </SelectTrigger>
-                <SelectContent className="rounded-lg border-slate-200">
-                  <SelectItem value="all">Todas</SelectItem>
-                  <SelectItem value="modelo">Modelo</SelectItem>
-                  <SelectItem value="ator">Ator</SelectItem>
-                  <SelectItem value="apresentador">Apresentador</SelectItem>
-                </SelectContent>
-              </Select>
+            <Select>
+              <SelectTrigger className="w-full h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white">
+                <SelectValue placeholder="Atuação" />
+              </SelectTrigger>
+              <SelectContent className="rounded-lg border-slate-200">
+                <SelectItem value="all">Todas</SelectItem>
+                <SelectItem value="modelo">Modelo</SelectItem>
+                <SelectItem value="ator">Ator</SelectItem>
+                <SelectItem value="apresentador">Apresentador</SelectItem>
+              </SelectContent>
+            </Select>
 
-              <Select>
-                <SelectTrigger className="w-32 h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white">
-                  <SelectValue placeholder="Onde Mora" />
-                </SelectTrigger>
-                <SelectContent className="rounded-lg border-slate-200">
-                  <SelectItem value="all">Todos</SelectItem>
-                  <SelectItem value="sp">São Paulo</SelectItem>
-                  <SelectItem value="rj">Rio de Janeiro</SelectItem>
-                  <SelectItem value="pr">Paraná</SelectItem>
-                  <SelectItem value="rs">Rio Grande do Sul</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+            <Select>
+              <SelectTrigger className="w-full h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white">
+                <SelectValue placeholder="Onde Mora" />
+              </SelectTrigger>
+              <SelectContent className="rounded-lg border-slate-200">
+                <SelectItem value="all">Todos</SelectItem>
+                <SelectItem value="sp">São Paulo</SelectItem>
+                <SelectItem value="rj">Rio de Janeiro</SelectItem>
+                <SelectItem value="pr">Paraná</SelectItem>
+                <SelectItem value="rs">Rio Grande do Sul</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
         </div>
