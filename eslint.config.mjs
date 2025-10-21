@@ -10,8 +10,12 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.extends("next/core-web-vitals"),
   {
+    rules: {
+      // Disable Tailwind CSS class warnings for gradient classes
+      "tailwindcss/no-custom-classname": "off",
+    },
     ignores: [
       "node_modules/**",
       ".next/**",

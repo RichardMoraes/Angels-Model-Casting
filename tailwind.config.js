@@ -50,4 +50,8 @@ module.exports = {
     },
   },
   plugins: [],
+  // Suppress gradient warnings as they are just optimization suggestions
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
 };

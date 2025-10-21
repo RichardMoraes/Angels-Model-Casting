@@ -6,7 +6,6 @@ import {
   Sheet,
   SheetContent,
   SheetDescription,
-  SheetHeader,
   SheetTitle,
 } from "../../components/ui/sheet";
 import {
@@ -83,7 +82,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
           <div className="relative z-10">
             <div className="flex items-start gap-6">
               {/* Profile Photo */}
-              <div className="flex-shrink-0">
+                      <div className="shrink-0">
                 <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-white/30 shadow-xl">
                   <Image
                     src={talent.mainPhotoUrl}
