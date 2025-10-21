@@ -30,7 +30,7 @@ const TalentCard = memo(function TalentCard({
 
   return (
     <Card
-      className="group cursor-pointer hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-200/50 bg-white hover:border-slate-300 hover:-translate-y-1 hover:scale-[1.01] shadow-lg hover:shadow-slate-300/50 relative z-10"
+      className="group cursor-pointer hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-200/50 bg-white hover:border-slate-300 hover:-translate-y-1 hover:scale-[1.01] shadow-lg hover:shadow-slate-300/50 relative z-10 h-full flex flex-col"
       onClick={() => onClick(talent)}
     >
       {/* Image Section */}
@@ -82,8 +82,8 @@ const TalentCard = memo(function TalentCard({
       </div>
 
       {/* Content Section */}
-      <CardContent className="p-6 bg-white">
-        <div className="space-y-6">
+      <CardContent className="p-6 bg-white flex-1 flex flex-col">
+        <div className="space-y-6 flex-1 flex flex-col justify-between">
           {/* Header */}
           <div className="flex items-start justify-between">
             <div className="flex-1 min-w-0">
@@ -142,8 +142,8 @@ const TalentCard = memo(function TalentCard({
             </div>
           </div>
 
-          {/* Skills */}
-          <div className="space-y-3">
+          {/* Skills - Sempre no final */}
+          <div className="space-y-3 mt-auto">
             <h4 className="text-sm font-semibold text-slate-700">Especialidades</h4>
             <div className="flex flex-wrap gap-2.5">
               {talent.skills.slice(0, 3).map((skill, index) => (

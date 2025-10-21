@@ -238,11 +238,16 @@ export default function CastingVitrine() {
 
           {/* Talent Grid */}
           {currentTalents.length > 0 ? (
-            <div className={`grid ${getGridClasses()} gap-4 sm:gap-6`}>
+            <div 
+              className={`grid ${getGridClasses()} gap-4 sm:gap-6`}
+              style={{
+                gridTemplateRows: 'repeat(auto-fit, minmax(500px, 1fr))'
+              }}
+            >
               {currentTalents.map((talent, index) => (
                 <div
                   key={talent.id}
-                  className="animate-in fade-in-0 slide-in-from-bottom-4 duration-500"
+                  className="animate-in fade-in-0 slide-in-from-bottom-4 duration-500 h-full"
                   style={{
                     animationDelay: `${index * 100}ms`,
                     animationFillMode: "both",
