@@ -236,18 +236,18 @@ export default function CastingVitrine() {
             </div>
           </div>
 
-          {/* Talent Grid */}
-          {currentTalents.length > 0 ? (
-            <div 
-              className={`grid ${getGridClasses()} gap-4 sm:gap-6`}
-              style={{
-                gridTemplateRows: 'repeat(auto-fit, minmax(500px, 1fr))'
-              }}
-            >
+                  {/* Talent Grid */}
+                  {currentTalents.length > 0 ? (
+                    <div 
+                      className={`grid ${getGridClasses()} gap-4 sm:gap-6 stagger-animation`}
+                      style={{
+                        gridTemplateRows: 'repeat(auto-fit, minmax(500px, 1fr))'
+                      }}
+                    >
                       {currentTalents.map((talent, index) => (
                         <div
                           key={talent.id}
-                          className="animate-in fade-in-0 slide-in-from-bottom-4 duration-500 h-full"
+                          className="h-full fade-in-up"
                           style={{
                             animationDelay: `${index * 100}ms`,
                             animationFillMode: "both",
@@ -260,38 +260,38 @@ export default function CastingVitrine() {
                           />
                         </div>
                       ))}
-            </div>
-          ) : (
-            <div className="text-center py-12 sm:py-16">
-              <div className="mx-auto w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-r from-slate-100 to-slate-200 rounded-full flex items-center justify-center mb-4 sm:mb-6">
-                <svg
-                  className="w-10 h-10 sm:w-12 sm:h-12 text-slate-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
-                Nenhum talento encontrado
-              </h3>
-              <p className="text-sm sm:text-base text-slate-500 mb-4 sm:mb-6 px-4">
-                Tente ajustar os filtros para encontrar mais talentos.
-              </p>
-              <button
-                onClick={handleClearFilters}
-                className="px-4 sm:px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 font-medium text-sm sm:text-base"
-              >
-                Limpar filtros
-              </button>
-            </div>
-          )}
+                    </div>
+                  ) : (
+                    <div className="text-center py-12 sm:py-16 fade-in-up">
+                      <div className="mx-auto w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-r from-slate-100 to-slate-200 rounded-full flex items-center justify-center mb-4 sm:mb-6 pulse-glow">
+                        <svg
+                          className="w-10 h-10 sm:w-12 sm:h-12 text-slate-400"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={1.5}
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                          />
+                        </svg>
+                      </div>
+                      <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
+                        Nenhum talento encontrado
+                      </h3>
+                      <p className="text-sm sm:text-base text-slate-500 mb-4 sm:mb-6 px-4">
+                        Tente ajustar os filtros para encontrar mais talentos.
+                      </p>
+                      <button
+                        onClick={handleClearFilters}
+                        className="px-4 sm:px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 hover-scale transition-all duration-200 font-medium text-sm sm:text-base"
+                      >
+                        Limpar filtros
+                      </button>
+                    </div>
+                  )}
 
           {/* Pagination */}
           {totalPages > 1 && (

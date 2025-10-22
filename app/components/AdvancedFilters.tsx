@@ -197,7 +197,7 @@ const AdvancedFilters = memo(function AdvancedFilters({
               {totalResults.toLocaleString()} elencos
             </span>
             
-                    <Button className="h-8 bg-gradient-to-r from-purple-500 to-purple-600 hover:shadow-lg text-white px-4 rounded-lg font-medium flex items-center gap-2 whitespace-nowrap transition-all duration-300">
+                    <Button className="h-8 bg-gradient-to-r from-purple-500 to-purple-600 hover:shadow-lg text-white px-4 rounded-lg font-medium flex items-center gap-2 whitespace-nowrap hover-scale transition-all duration-300">
                       <Star className="h-4 w-4" />
                       <span className="hidden lg:inline">AZ Elenco Premium</span>
                       <span className="lg:hidden">Premium</span>
@@ -209,20 +209,20 @@ const AdvancedFilters = memo(function AdvancedFilters({
         <div className="mt-3 pt-3 border-t border-slate-100">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
             <span className="text-sm text-slate-500 whitespace-nowrap">Filtros rápidos:</span>
-            <div className="flex items-center gap-2 flex-wrap">
-              <Button variant="outline" size="sm" className="h-7 px-3 text-xs border-slate-200 hover:bg-slate-50">
-                Novos
-              </Button>
-              <Button variant="outline" size="sm" className="h-7 px-3 text-xs border-slate-200 hover:bg-slate-50">
-                Premium
-              </Button>
-              <Button variant="outline" size="sm" className="h-7 px-3 text-xs border-slate-200 hover:bg-slate-50">
-                Disponíveis
-              </Button>
-              <Button variant="outline" size="sm" className="h-7 px-3 text-xs border-slate-200 hover:bg-slate-50">
-                Com DRT
-              </Button>
-            </div>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <Button variant="outline" size="sm" className="h-7 px-3 text-xs border-slate-200 hover:bg-slate-50 hover-scale transition-all duration-200">
+                        Novos
+                      </Button>
+                      <Button variant="outline" size="sm" className="h-7 px-3 text-xs border-slate-200 hover:bg-slate-50 hover-scale transition-all duration-200">
+                        Premium
+                      </Button>
+                      <Button variant="outline" size="sm" className="h-7 px-3 text-xs border-slate-200 hover:bg-slate-50 hover-scale transition-all duration-200">
+                        Disponíveis
+                      </Button>
+                      <Button variant="outline" size="sm" className="h-7 px-3 text-xs border-slate-200 hover:bg-slate-50 hover-scale transition-all duration-200">
+                        Com DRT
+                      </Button>
+                    </div>
           </div>
         </div>
       </div>

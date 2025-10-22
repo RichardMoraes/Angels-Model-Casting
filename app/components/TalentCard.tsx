@@ -31,16 +31,16 @@ const TalentCard = memo(function TalentCard({
   };
 
   return (
-    <Card
-      className="group cursor-pointer hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-200/50 bg-white hover:border-purple-200 hover:-translate-y-2 hover:scale-[1.02] shadow-lg relative z-10 h-full flex flex-col"
-      onClick={() => onClick(talent)}
-    >
+            <Card
+              className="group cursor-pointer hover-lift hover-glow transition-all duration-300 overflow-hidden border border-slate-200/50 bg-white hover:border-purple-200 shadow-lg relative z-10 h-full flex flex-col"
+              onClick={() => onClick(talent)}
+            >
       {/* Image Section */}
       <div className="relative w-full h-72 overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100">
         {/* Loading placeholder */}
         {!imageLoaded && !imageError && (
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-100 to-slate-200 animate-pulse flex items-center justify-center">
-            <div className="w-16 h-16 bg-slate-300 rounded-full animate-pulse"></div>
+          <div className="absolute inset-0 loading-skeleton rounded-none flex items-center justify-center">
+            <div className="w-16 h-16 bg-white/20 rounded-full animate-pulse"></div>
           </div>
         )}
 
@@ -148,17 +148,17 @@ const TalentCard = memo(function TalentCard({
           <div className="space-y-3 mt-auto">
             <h4 className="text-sm font-semibold text-slate-700">Especialidades</h4>
             <div className="grid grid-cols-2 gap-2">
-              {talent.skills.slice(0, 3).map((skill, index) => (
+                      {talent.skills.slice(0, 3).map((skill, index) => (
                         <span
                           key={skill}
-                          className="px-3 py-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white text-xs font-semibold rounded-full shadow-md group-hover:shadow-lg transition-all duration-300 hover:scale-105 text-center truncate"
+                          className="px-3 py-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white text-xs font-semibold rounded-full shadow-md group-hover:shadow-lg hover-scale transition-all duration-300 text-center truncate"
                           style={{
                             animationDelay: `${index * 100}ms`,
                           }}
                         >
                           {skill}
                         </span>
-              ))}
+                      ))}
               {talent.skills.length > 3 && (
                 <span className="px-3 py-2 bg-slate-200 text-slate-600 text-xs font-semibold rounded-full group-hover:bg-slate-300 transition-colors duration-300 text-center">
                   +{talent.skills.length - 3}

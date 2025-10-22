@@ -78,9 +78,9 @@ export default function Header({ totalTalents, filteredTalents }: HeaderProps) {
             </button>
 
             {/* Notifications */}
-            <button className="relative p-2 text-white hover:text-blue-300 transition-colors duration-200">
+            <button className="relative p-2 text-white hover:text-blue-300 hover-scale transition-all duration-200">
               <Bell className="w-5 h-5" />
-              <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full text-xs flex items-center justify-center text-white">
+              <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full text-xs flex items-center justify-center text-white pulse-glow">
                 3
               </span>
             </button>
@@ -89,9 +89,9 @@ export default function Header({ totalTalents, filteredTalents }: HeaderProps) {
             <div className="relative">
               <button
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                className="flex items-center space-x-2 text-white hover:text-blue-300 transition-colors duration-200"
+                className="flex items-center space-x-2 text-white hover:text-blue-300 hover-scale transition-all duration-200"
               >
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center hover-glow">
                   <User className="w-4 h-4 text-white" />
                 </div>
                 <span className="hidden sm:block font-medium">RICH</span>
