@@ -2,18 +2,18 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-:root {
+  :root {
   /* Professional Corporate Color Palette - Enhanced */
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
   
   /* Primary Corporate Colors - Deep Purple/Blue */
   --primary: 258 90% 25%; /* #2D1B69 - Deep Corporate Purple */
-  --primary-foreground: 210 40% 98%;
+    --primary-foreground: 210 40% 98%;
   --primary-50: 258 100% 98%;
   --primary-100: 258 100% 95%;
   --primary-200: 258 100% 90%;
@@ -26,16 +26,16 @@
   --primary-900: 258 90% 15%;
   
   /* Secondary Professional Colors */
-  --secondary: 210 40% 96%;
-  --secondary-foreground: 222.2 84% 4.9%;
-  --muted: 210 40% 96%;
-  --muted-foreground: 215.4 16.3% 46.9%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
   --accent: 258 90% 35%; /* Lighter corporate purple */
   --accent-foreground: 210 40% 98%;
   
   /* Status Colors - Enhanced */
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
   --success: 142 76% 36%; /* Professional green */
   --success-foreground: 210 40% 98%;
   --warning: 38 92% 50%; /* Professional amber */
@@ -55,8 +55,8 @@
   --gray-800: 215.4 16.3% 11.9%;
   --gray-900: 215.4 16.3% 6.9%;
   
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
   --ring: 258 90% 25%;
   --radius: 0.75rem; /* Increased for more modern look */
   
@@ -75,31 +75,31 @@
   --gradient-accent: linear-gradient(135deg, hsl(258 90% 45%) 0%, hsl(258 90% 55%) 100%);
   --gradient-subtle: linear-gradient(135deg, hsl(258 90% 25% / 0.1) 0%, hsl(258 90% 35% / 0.1) 100%);
   --gradient-overlay: linear-gradient(135deg, hsl(258 90% 25% / 0.8) 0%, hsl(258 90% 35% / 0.8) 100%);
-}
+  }
 
-.dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --card: 222.2 84% 4.9%;
-  --card-foreground: 210 40% 98%;
-  --popover: 222.2 84% 4.9%;
-  --popover-foreground: 210 40% 98%;
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
   --primary: 258 90% 35%; /* Lighter purple for dark mode */
-  --primary-foreground: 222.2 47.4% 11.2%;
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
   --accent: 258 90% 45%; /* Even lighter for dark mode */
-  --accent-foreground: 210 40% 98%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
   --success: 142 76% 46%; /* Brighter green for dark mode */
   --success-foreground: 210 40% 98%;
   --warning: 38 92% 60%; /* Brighter amber for dark mode */
   --warning-foreground: 210 40% 98%;
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
   --ring: 258 90% 35%;
 }
 
@@ -424,6 +424,142 @@ body {
 .stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
 .stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
 .stagger-animation > *:nth-child(6) { animation-delay: 0.6s; }
+
+/* Enhanced Micro-animations for Phase 6 */
+.animate-fade-in-scale {
+  animation: fade-in-scale 0.4s ease-out forwards;
+}
+
+@keyframes fade-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.5s ease-out forwards;
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.5s ease-out forwards;
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 5px hsl(var(--primary) / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.6), 0 0 30px hsl(var(--primary) / 0.4);
+  }
+}
+
+/* Enhanced hover effects with better performance */
+.hover-lift-enhanced {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+
+.hover-lift-enhanced:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-xl), 0 0 30px hsl(var(--primary) / 0.2);
+}
+
+.hover-scale-enhanced {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.hover-scale-enhanced:hover {
+  transform: scale(1.05);
+}
+
+.hover-glow-enhanced {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: box-shadow;
+}
+
+.hover-glow-enhanced:hover {
+  box-shadow: 0 0 30px hsl(var(--primary) / 0.4);
+}
+
+/* Smooth image transitions */
+.image-transition {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  will-change: opacity, transform;
+}
+
+.image-transition:hover {
+  transform: scale(1.05);
+}
+
+/* Enhanced button interactions */
+.btn-interactive {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+
+.btn-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-interactive:active {
+  transform: translateY(0);
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
 
 /* Professional Card Styles */

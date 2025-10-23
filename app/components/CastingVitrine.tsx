@@ -245,9 +245,9 @@ export default function CastingVitrine() {
                       {currentTalents.map((talent, index) => (
                         <div
                           key={talent.id}
-                          className="h-full fade-in-up"
+                          className="h-full animate-fade-in-scale hover-lift-enhanced"
                           style={{
-                            animationDelay: `${index * 100}ms`,
+                            animationDelay: `${index * 150}ms`,
                             animationFillMode: "both",
                           }}
                         >

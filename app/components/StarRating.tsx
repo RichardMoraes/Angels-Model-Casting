@@ -56,10 +56,10 @@ const StarRating = memo(function StarRating({
       <Star
         key={starNumber}
         className={`${sizeClasses[size]} ${
-          interactive ? "cursor-pointer hover:scale-110" : ""
+          interactive ? "cursor-pointer hover-scale-enhanced" : ""
         } transition-all duration-200 ${
           isFilled || isHalfFilled
-            ? "text-yellow-400 fill-yellow-400"
+            ? "text-yellow-400 fill-yellow-400 hover-glow-enhanced"
             : "text-gray-300"
         } ${interactive ? "hover:text-yellow-300" : ""}`}
         onClick={() => handleStarClick(starNumber)}

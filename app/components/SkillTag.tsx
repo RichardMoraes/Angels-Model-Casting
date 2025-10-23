@@ -70,10 +70,12 @@ const SkillTag = memo(function SkillTag({
         ${sizeClasses[size]}
         rounded-full font-semibold
         transition-all duration-200
-        hover:scale-105
+        hover-scale-enhanced
         shadow-sm hover:shadow-md
         inline-flex items-center justify-center
         min-w-[24px] h-6
+        hover-glow-enhanced
+        animate-fade-in-scale
       `}
       title={showDescription ? undefined : config.description}
     >

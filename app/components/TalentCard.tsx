@@ -76,7 +76,7 @@ const TalentCard = memo(function TalentCard({
 
   return (
             <Card
-              className="group cursor-pointer card-interactive overflow-hidden border border-gray-200/50 bg-white hover:border-primary/30 shadow-professional relative z-10 h-full flex flex-col"
+              className="group cursor-pointer card-interactive hover-lift-enhanced overflow-hidden border border-gray-200/50 bg-white hover:border-primary/30 shadow-professional relative z-10 h-full flex flex-col animate-fade-in-scale"
               onClick={() => onClick(talent)}
             >
       {/* Image Section */}
@@ -93,7 +93,7 @@ const TalentCard = memo(function TalentCard({
           alt={`Foto de ${talent.name}`}
           width={400}
           height={288}
-          className={`w-full h-full object-cover group-hover:scale-110 transition-all duration-700 ${
+          className={`w-full h-full object-cover image-transition group-hover:scale-110 transition-all duration-700 ${
             imageLoaded ? "opacity-100" : "opacity-0"
           }`}
           priority={isPriority}
@@ -108,7 +108,7 @@ const TalentCard = memo(function TalentCard({
             {/* Previous Photo Button */}
             <button
               onClick={handlePreviousPhoto}
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 z-20"
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover-scale-enhanced btn-interactive z-20 animate-slide-in-left"
               aria-label="Previous photo"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -117,7 +117,7 @@ const TalentCard = memo(function TalentCard({
             {/* Next Photo Button */}
             <button
               onClick={handleNextPhoto}
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 z-20"
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover-scale-enhanced btn-interactive z-20 animate-slide-in-right"
               aria-label="Next photo"
             >
               <ChevronRight className="w-4 h-4" />
@@ -127,7 +127,7 @@ const TalentCard = memo(function TalentCard({
 
         {/* Photo Counter */}
         {talent.photos.length > 1 && (
-          <div className="absolute top-3 right-3 bg-black/50 text-white px-2 py-1 rounded-full text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+          <div className="absolute top-3 right-3 bg-black/50 text-white px-2 py-1 rounded-full text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 animate-bounce-in">
             {currentPhotoIndex + 1}/{talent.photos.length}
           </div>
         )}
@@ -136,8 +136,8 @@ const TalentCard = memo(function TalentCard({
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
         {/* Quick info overlay - Shows unique information on hover */}
-        <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-          <div className="bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-professional">
+        <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 animate-fade-in-scale">
+          <div className="bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-professional hover-glow-enhanced">
             <div className="flex items-center justify-between text-sm">
               <div className="flex items-center gap-2 text-gray-600">
                 <Calendar className="w-4 h-4" />
@@ -149,7 +149,7 @@ const TalentCard = memo(function TalentCard({
               </div>
             </div>
             <div className="mt-2 text-center">
-              <span className="text-xs font-semibold text-gray-700 bg-gray-100 px-2 py-1 rounded-full">
+              <span className="text-xs font-semibold text-gray-700 bg-gray-100 px-2 py-1 rounded-full hover-scale-enhanced transition-all duration-200">
                 {talent.skills.length} specialties
               </span>
             </div>
@@ -165,7 +165,7 @@ const TalentCard = memo(function TalentCard({
             {/* Name and Status */}
             <div className="flex items-start justify-between">
               <div className="flex-1 min-w-0">
-                <h3 className="text-xl font-semibold text-slate-900 group-hover:text-purple-600 transition-colors duration-300 truncate">
+                <h3 className="text-xl font-semibold text-slate-900 group-hover:text-purple-600 transition-colors duration-300 truncate hover-glow-enhanced">
                   {talent.name}
                 </h3>
                 <div className="flex items-center gap-2 mt-1">
@@ -189,7 +189,7 @@ const TalentCard = memo(function TalentCard({
                   size="sm"
                 />
                 {/* Gender badge */}
-                <div className="px-3 py-1.5 bg-purple-50 text-purple-700 text-xs font-semibold rounded-full border border-purple-200/50 group-hover:bg-purple-100 transition-colors duration-300">
+                <div className="px-3 py-1.5 bg-purple-50 text-purple-700 text-xs font-semibold rounded-full border border-purple-200/50 group-hover:bg-purple-100 transition-colors duration-300 hover-scale-enhanced animate-bounce-in">
                   {(() => {
                     switch (talent.gender) {
                       case "Female": return "Fem";

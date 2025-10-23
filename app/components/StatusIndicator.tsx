@@ -60,7 +60,7 @@ const StatusIndicator = memo(function StatusIndicator({
       {isPremium && (
         <div title="Premium Talent">
           <Crown
-            className={`${iconSizeClasses[size]} text-yellow-500 fill-yellow-500 transition-all duration-200 hover:scale-110`}
+            className={`${iconSizeClasses[size]} text-yellow-500 fill-yellow-500 transition-all duration-200 hover-scale-enhanced hover-glow-enhanced animate-glow-pulse`}
           />
         </div>
       )}
