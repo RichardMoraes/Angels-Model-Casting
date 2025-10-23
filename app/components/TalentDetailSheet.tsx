@@ -80,7 +80,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent
         side="right"
-        className="w-full sm:w-[70vw] md:w-[65vw] lg:w-[60vw] xl:w-[55vw] 2xl:w-[50vw] overflow-y-auto bg-slate-50 p-0"
+        className="w-full sm:w-[70vw] md:w-[65vw] lg:w-[60vw] xl:w-[55vw] 2xl:w-[50vw] overflow-y-auto bg-gray-50 p-0"
       >
         {talent && (
           <>
@@ -93,7 +93,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
             </button>
 
             {/* Header Section with Photo */}
-            <div className="relative bg-gradient-to-r from-slate-900 to-slate-700 text-white pt-12 pb-6 px-4 lg:pt-20 lg:pb-10 lg:px-10">
+            <div className="relative bg-corporate-gradient text-white pt-12 pb-6 px-4 lg:pt-20 lg:pb-8 lg:px-10">
               {/* Background Photo */}
               <div className="absolute inset-0 overflow-hidden">
                 {imageErrorStates["background"] ? (
@@ -113,14 +113,14 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                     onError={() => handleImageError("background")}
                   />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-700/80"></div>
+                <div className="absolute inset-0 bg-corporate-gradient-overlay"></div>
               </div>
 
               {/* Content */}
               <div className="relative z-10">
-                <div className="flex flex-col lg:flex-row items-start gap-4 lg:gap-6">
+                <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-6">
                   {/* Profile Photo */}
-                  <div className="shrink-0 mx-auto lg:mx-0">
+                  <div className="shrink-0">
                     <div className="relative w-20 h-20 lg:w-32 lg:h-32 rounded-full overflow-hidden border-4 border-white/30 shadow-xl">
                       {imageErrorStates["profile"] ? (
                         <div className="w-full h-full bg-gradient-to-br from-slate-700 to-slate-600 flex items-center justify-center">
@@ -143,7 +143,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                   </div>
 
                   {/* Profile Info */}
-                  <div className="flex-1 min-w-0 text-center lg:text-left">
+                  <div className="flex-1 min-w-0 text-center lg:text-left w-full lg:w-auto">
                     <SheetTitle className="text-2xl lg:text-4xl font-bold mb-2 text-white drop-shadow-2xl shadow-black/50">
                       {talent.name}
                     </SheetTitle>
@@ -195,19 +195,19 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
             </div>
 
             {/* Content Area */}
-            <div className="p-3 lg:p-8">
-              <Tabs defaultValue="summary" className="space-y-3 lg:space-y-8">
-                <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 bg-white shadow-sm p-1 rounded-lg gap-1">
+            <div className="px-4 lg:px-10 py-6 lg:py-8">
+              <Tabs defaultValue="summary" className="space-y-6 lg:space-y-8">
+                <TabsList className="flex w-full bg-white shadow-professional-sm p-3 rounded-xl gap-1 mx-0">
                   <TabsTrigger
                     value="summary"
-                    className="data-[state=active]:bg-blue-500 data-[state=active]:text-white px-1 md:px-2 py-2 text-xs md:text-sm"
+                    className="data-[state=active]:bg-primary data-[state=active]:text-white px-2 py-3 text-xs md:text-sm transition-professional hover-scale flex-1 text-center"
                   >
                     <span className="hidden lg:inline">Summary</span>
                     <span className="lg:hidden">Summary</span>
                   </TabsTrigger>
                   <TabsTrigger
                     value="photos"
-                    className="data-[state=active]:bg-blue-500 data-[state=active]:text-white px-1 md:px-2 py-2 text-xs md:text-sm"
+                    className="data-[state=active]:bg-primary data-[state=active]:text-white px-2 py-3 text-xs md:text-sm transition-professional hover-scale flex-1 text-center"
                   >
                     <span className="hidden lg:inline">
                       Photos ({talent.photos.length})
@@ -216,7 +216,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                   </TabsTrigger>
                   <TabsTrigger
                     value="videos"
-                    className="data-[state=active]:bg-blue-500 data-[state=active]:text-white px-1 md:px-2 py-2 text-xs md:text-sm"
+                    className="data-[state=active]:bg-primary data-[state=active]:text-white px-2 py-3 text-xs md:text-sm transition-professional hover-scale flex-1 text-center"
                   >
                     <span className="hidden lg:inline">
                       Videos ({talent.videos.length})
@@ -225,7 +225,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                   </TabsTrigger>
                   <TabsTrigger
                     value="skills"
-                    className="data-[state=active]:bg-blue-500 data-[state=active]:text-white px-1 md:px-2 py-2 text-xs md:text-sm"
+                    className="data-[state=active]:bg-primary data-[state=active]:text-white px-2 py-3 text-xs md:text-sm transition-professional hover-scale flex-1 text-center"
                   >
                     <span className="hidden lg:inline">
                       Skills ({talent.skills.length})
@@ -234,7 +234,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                   </TabsTrigger>
                 </TabsList>
 
-                <TabsContent value="summary" className="space-y-3 lg:space-y-8">
+                <TabsContent value="summary" className="space-y-6 lg:space-y-8">
                   {/* Contact Information */}
                   <div className="bg-white rounded-xl p-3 lg:p-8 shadow-sm border border-slate-200">
                     <h3 className="text-base lg:text-xl font-semibold text-slate-900 mb-2 lg:mb-4 flex items-center">
@@ -330,7 +330,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                   </div>
                 </TabsContent>
 
-                <TabsContent value="photos" className="space-y-3 lg:space-y-8">
+                <TabsContent value="photos" className="space-y-6 lg:space-y-8">
                   <div className="bg-white rounded-xl p-3 lg:p-8 shadow-sm border border-slate-200">
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 gap-2 sm:gap-0">
                       <h3 className="text-base sm:text-lg font-semibold text-slate-900">
@@ -395,7 +395,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                   </div>
                 </TabsContent>
 
-                <TabsContent value="videos" className="space-y-4">
+                <TabsContent value="videos" className="space-y-6 lg:space-y-8">
                   <div className="bg-white rounded-xl p-4 shadow-sm border border-slate-200">
                     <h3 className="text-lg font-semibold text-slate-900 mb-3">
                       Demonstration Videos
@@ -424,7 +424,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                   </div>
                 </TabsContent>
 
-                <TabsContent value="skills" className="space-y-4">
+                <TabsContent value="skills" className="space-y-6 lg:space-y-8">
                   <div className="bg-white rounded-xl p-4 shadow-sm border border-slate-200">
                     <h3 className="text-lg font-semibold text-slate-900 mb-3">
                       Specialties and Skills

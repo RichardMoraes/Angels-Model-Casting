@@ -51,17 +51,17 @@ const Filters = memo(function Filters({
     <div className="space-y-6 animate-in fade-in-0 slide-in-from-top-4 duration-500">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <div className="h-8 w-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center animate-pulse">
+          <div className="h-8 w-8 bg-corporate-gradient rounded-lg flex items-center justify-center hover-scale transition-professional">
             <Search className="h-4 w-4 text-white" />
           </div>
-          <h2 className="text-xl font-bold text-slate-900">Filters</h2>
+          <h2 className="text-h4 font-bold text-gray-900">Filters</h2>
         </div>
         {hasActiveFilters && (
           <Button
             variant="outline"
             size="sm"
             onClick={onClearFilters}
-            className="flex items-center gap-2 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-all duration-200 animate-in fade-in-0 slide-in-from-right-4"
+            className="flex items-center gap-2 hover:bg-destructive/10 hover:text-destructive hover:border-destructive/30 transition-professional animate-fade-in"
           >
             <X className="h-4 w-4" />
             Clear filters

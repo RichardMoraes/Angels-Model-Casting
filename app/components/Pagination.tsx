@@ -68,7 +68,7 @@ const Pagination = memo(function Pagination({
         size="sm"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="flex items-center gap-1 sm:gap-2 h-9 sm:h-10 px-3 sm:px-4 rounded-xl border-slate-200 hover:border-blue-500 hover:bg-blue-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-xs sm:text-sm hover:scale-105"
+        className="flex items-center gap-1 sm:gap-2 h-9 sm:h-10 px-3 sm:px-4 rounded-xl border-gray-200 hover:border-primary hover:bg-primary/5 disabled:opacity-50 disabled:cursor-not-allowed transition-professional text-xs sm:text-sm hover-scale"
       >
         <ChevronLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
         <span className="hidden sm:inline">Previous</span>
@@ -115,7 +115,7 @@ const Pagination = memo(function Pagination({
         size="sm"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="flex items-center gap-1 sm:gap-2 h-9 sm:h-10 px-3 sm:px-4 rounded-xl border-slate-200 hover:border-blue-500 hover:bg-blue-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-xs sm:text-sm hover:scale-105"
+        className="flex items-center gap-1 sm:gap-2 h-9 sm:h-10 px-3 sm:px-4 rounded-xl border-gray-200 hover:border-primary hover:bg-primary/5 disabled:opacity-50 disabled:cursor-not-allowed transition-professional text-xs sm:text-sm hover-scale"
       >
         <span className="hidden sm:inline">Next</span>
         <span className="sm:hidden">Next</span>

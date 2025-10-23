@@ -45,11 +45,11 @@ const TalentCard = memo(function TalentCard({
 
   return (
             <Card
-              className="group cursor-pointer hover-lift hover-glow transition-all duration-300 overflow-hidden border border-slate-200/50 bg-white hover:border-purple-200 shadow-lg relative z-10 h-full flex flex-col"
+              className="group cursor-pointer card-interactive overflow-hidden border border-gray-200/50 bg-white hover:border-primary/30 shadow-professional relative z-10 h-full flex flex-col"
               onClick={() => onClick(talent)}
             >
       {/* Image Section */}
-      <div className="relative w-full h-72 overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100">
+      <div className="relative w-full h-72 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
         {/* Loading placeholder */}
         {!imageLoaded && !imageError && (
           <div className="absolute inset-0 loading-skeleton rounded-none flex items-center justify-center">
@@ -76,19 +76,19 @@ const TalentCard = memo(function TalentCard({
 
         {/* Quick info overlay - Shows unique information on hover */}
         <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-          <div className="bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-lg">
+          <div className="bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-professional">
             <div className="flex items-center justify-between text-sm">
-              <div className="flex items-center gap-2 text-slate-600">
+              <div className="flex items-center gap-2 text-gray-600">
                 <Calendar className="w-4 h-4" />
-                <span>{talent.age} anos</span>
+                <span>{talent.age} years</span>
               </div>
-              <div className="flex items-center gap-2 text-slate-600">
+              <div className="flex items-center gap-2 text-gray-600">
                 <MapPin className="w-4 h-4" />
                 <span>{talent.city}</span>
               </div>
             </div>
             <div className="mt-2 text-center">
-              <span className="text-xs font-semibold text-slate-700 bg-slate-100 px-2 py-1 rounded-full">
+              <span className="text-xs font-semibold text-gray-700 bg-gray-100 px-2 py-1 rounded-full">
                 {talent.skills.length} specialties
               </span>
             </div>
