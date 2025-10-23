@@ -21,4 +21,12 @@ export interface TalentProfile {
     title: string;
     url: string;
   }[];
+  // Phase 6 - Visual Refinements
+  rating: number; // 1-5 star rating
+  skillTags: ("F" | "E" | "O" | "R")[]; // F=Fotografia, E=Eventos, O=Online, R=Rádio/TV
+  status: {
+    isOnline: boolean;
+    isPremium: boolean;
+    isAvailable: boolean;
+  };
 }

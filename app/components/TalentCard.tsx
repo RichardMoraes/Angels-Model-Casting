@@ -5,6 +5,9 @@ import { TalentProfile } from "../types/TalentProfile";
 import { Card, CardContent } from "../../components/ui/card";
 import Image from "next/image";
 import { MapPin, Calendar, Ruler, Weight, Eye, User } from "lucide-react";
+import StarRating from "./StarRating";
+import SkillTag from "./SkillTag";
+import StatusIndicator from "./StatusIndicator";
 
 /**
  * Props for the TalentCard component
@@ -100,33 +103,60 @@ const TalentCard = memo(function TalentCard({
       <CardContent className="p-6 bg-white flex-1 flex flex-col">
         <div className="space-y-6 flex-1 flex flex-col justify-between">
           {/* Header */}
-          <div className="flex items-start justify-between">
-            <div className="flex-1 min-w-0">
-                      <h3 className="text-xl font-semibold text-slate-900 group-hover:text-purple-600 transition-colors duration-300 truncate">
-                        {talent.name}
-                      </h3>
-              <div className="flex items-center gap-2 mt-2">
-                <Calendar className="w-4 h-4 text-slate-400" />
-                <span className="text-sm font-medium text-slate-600">
-                  {talent.age} anos
-                </span>
-                <span className="text-slate-300">•</span>
-                <span className="text-sm font-medium text-slate-600 capitalize">
-                  {talent.details.ethnicity}
-                </span>
+          <div className="space-y-3">
+            {/* Name and Status */}
+            <div className="flex items-start justify-between">
+              <div className="flex-1 min-w-0">
+                <h3 className="text-xl font-semibold text-slate-900 group-hover:text-purple-600 transition-colors duration-300 truncate">
+                  {talent.name}
+                </h3>
+                <div className="flex items-center gap-2 mt-1">
+                  <Calendar className="w-4 h-4 text-slate-400" />
+                  <span className="text-sm font-medium text-slate-600">
+                    {talent.age} anos
+                  </span>
+                  <span className="text-slate-300">•</span>
+                  <span className="text-sm font-medium text-slate-600 capitalize">
+                    {talent.details.ethnicity}
+                  </span>
+                </div>
+              </div>
+              
+              {/* Status Indicators */}
+              <div className="ml-4 flex flex-col items-end gap-2">
+                <StatusIndicator
+                  isOnline={talent.status.isOnline}
+                  isPremium={talent.status.isPremium}
+                  isAvailable={talent.status.isAvailable}
+                  size="sm"
+                />
+                {/* Gender badge */}
+                <div className="px-3 py-1.5 bg-purple-50 text-purple-700 text-xs font-semibold rounded-full border border-purple-200/50 group-hover:bg-purple-100 transition-colors duration-300">
+                  {(() => {
+                    switch (talent.gender) {
+                      case "Female": return "Fem";
+                      case "Male": return "Masc";
+                      default: return "NB";
+                    }
+                  })()}
+                </div>
               </div>
             </div>
-            
-                    {/* Gender badge */}
-                    <div className="ml-4 px-3 py-1.5 bg-purple-50 text-purple-700 text-xs font-semibold rounded-full border border-purple-200/50 group-hover:bg-purple-100 transition-colors duration-300">
-                      {(() => {
-                        switch (talent.gender) {
-                          case "Female": return "Fem";
-                          case "Male": return "Masc";
-                          default: return "NB";
-                        }
-                      })()}
-                    </div>
+
+            {/* Star Rating */}
+            <div className="flex items-center justify-between">
+              <StarRating rating={talent.rating} size="sm" />
+              <div className="text-xs text-gray-500">
+                {talent.photos.length} photos
+              </div>
+            </div>
+
+            {/* Skill Tags */}
+            <div className="flex items-center gap-2 flex-wrap">
+              {talent.skillTags.map((tag) => (
+                <SkillTag key={`${talent.id}-${tag}`} type={tag} size="sm" />
+              ))}
+            </div>
           </div>
 
           {/* Location */}

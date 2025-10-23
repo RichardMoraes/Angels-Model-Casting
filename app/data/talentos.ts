@@ -30,6 +30,14 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
+    // Phase 6 - Visual Refinements
+    rating: 4.5,
+    skillTags: ["F", "E", "O"],
+    status: {
+      isOnline: true,
+      isPremium: true,
+      isAvailable: true,
+    },
   },
   {
     id: "carlos-santos-02",
@@ -60,6 +68,14 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
+    // Phase 6 - Visual Refinements
+    rating: 4.2,
+    skillTags: ["F", "E"],
+    status: {
+      isOnline: false,
+      isPremium: false,
+      isAvailable: true,
+    },
   },
   {
     id: "maria-costa-03",
@@ -90,6 +106,14 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
+    // Phase 6 - Visual Refinements
+    rating: 4.8,
+    skillTags: ["E", "O", "R"],
+    status: {
+      isOnline: true,
+      isPremium: true,
+      isAvailable: true,
+    },
   },
   {
     id: "joao-oliveira-04",
@@ -120,6 +144,14 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
+    // Phase 6 - Visual Refinements
+    rating: 4.0,
+    skillTags: ["F", "R"],
+    status: {
+      isOnline: true,
+      isPremium: false,
+      isAvailable: false,
+    },
   },
   {
     id: "sofia-mendes-05",
@@ -150,6 +182,14 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
+    // Phase 6 - Visual Refinements
+    rating: 3.8,
+    skillTags: ["F", "E"],
+    status: {
+      isOnline: false,
+      isPremium: false,
+      isAvailable: true,
+    },
   },
   {
     id: "pedro-almeida-06",
@@ -180,6 +220,14 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
+    // Phase 6 - Visual Refinements
+    rating: 4.6,
+    skillTags: ["E", "R"],
+    status: {
+      isOnline: true,
+      isPremium: true,
+      isAvailable: true,
+    },
   },
   {
     id: "lucia-ferreira-07",
@@ -210,6 +258,14 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
+    // Phase 6 - Visual Refinements
+    rating: 4.3,
+    skillTags: ["E", "R"],
+    status: {
+      isOnline: false,
+      isPremium: false,
+      isAvailable: true,
+    },
   },
   {
     id: "rafael-silva-08",
@@ -240,6 +296,14 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
+    // Phase 6 - Visual Refinements
+    rating: 4.1,
+    skillTags: ["F", "E"],
+    status: {
+      isOnline: true,
+      isPremium: false,
+      isAvailable: true,
+    },
   },
   {
     id: "camila-rodrigues-09",
@@ -270,6 +334,14 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
+    // Phase 6 - Visual Refinements
+    rating: 3.9,
+    skillTags: ["F", "E"],
+    status: {
+      isOnline: false,
+      isPremium: false,
+      isAvailable: true,
+    },
   },
   {
     id: "marcos-pereira-10",
@@ -300,5 +372,13 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
+    // Phase 6 - Visual Refinements
+    rating: 4.4,
+    skillTags: ["E", "R"],
+    status: {
+      isOnline: true,
+      isPremium: true,
+      isAvailable: true,
+    },
   },
 ];
