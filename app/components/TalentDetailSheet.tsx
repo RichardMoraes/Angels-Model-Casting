@@ -3,8 +3,6 @@
 import { useState, memo } from "react";
 import { TalentProfile } from "../types/TalentProfile";
 import {
-  Sheet,
-  SheetContent,
   SheetDescription,
   SheetTitle,
 } from "../../components/ui/sheet";
@@ -32,6 +30,7 @@ import {
   X,
 } from "lucide-react";
 import SkillTag from "./SkillTag";
+import { AnimatePresence, motion } from "framer-motion";
 
 /**
  * Props for the TalentDetailSheet component
@@ -60,7 +59,6 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
   const [imageErrorStates, setImageErrorStates] = useState<
     Record<string, boolean>
   >({});
-  const [isAnimating, setIsAnimating] = useState(false);
 
   /**
    * Handles successful image loading
@@ -77,29 +75,33 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
     setImageLoadedStates((prev) => ({ ...prev, [imageKey]: true }));
   };
 
-  /**
-   * Handle sheet state changes with animation control
-   */
-  const handleOpenChange = (open: boolean) => {
-    if (!open) {
-      setIsAnimating(true);
-      // Delay the actual close to allow animation
-      setTimeout(() => {
-        onClose();
-        setIsAnimating(false);
-      }, 300);
-    } else {
-      setIsAnimating(false);
-    }
-  };
-
-  // Always render the Sheet, but control visibility with isOpen prop
   return (
-    <Sheet open={isOpen} onOpenChange={handleOpenChange}>
-      <SheetContent
-        side="right"
-        className={`w-full sm:w-[70vw] md:w-[65vw] lg:w-[60vw] xl:w-[55vw] 2xl:w-[50vw] overflow-y-auto bg-gray-50 p-0 custom-sidebar ${isAnimating ? 'animating-out' : 'animating-in'}`}
-      >
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Overlay */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 bg-black/50"
+            onClick={onClose}
+          />
+          
+          {/* Sidebar */}
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ 
+              type: "spring", 
+              damping: 25, 
+              stiffness: 200,
+              duration: 0.3 
+            }}
+            className="fixed right-0 top-0 h-full w-full sm:w-[70vw] md:w-[65vw] lg:w-[60vw] xl:w-[55vw] 2xl:w-[50vw] z-50 bg-gray-50 overflow-y-auto"
+          >
         {talent && (
           <>
             {/* Custom Close Button */}
@@ -482,8 +484,10 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
             </div>
           </>
         )}
-      </SheetContent>
-    </Sheet>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 });
 
