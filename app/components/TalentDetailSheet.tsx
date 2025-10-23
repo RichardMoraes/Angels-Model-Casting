@@ -31,6 +31,7 @@ import {
   MessageCircle,
   X,
 } from "lucide-react";
+import SkillTag from "./SkillTag";
 
 /**
  * Props for the TalentDetailSheet component
@@ -425,6 +426,22 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                 </TabsContent>
 
                 <TabsContent value="skills" className="space-y-6 lg:space-y-8">
+                  {/* Professional Categories */}
+                  <div className="bg-white rounded-xl p-4 shadow-sm border border-slate-200">
+                    <h3 className="text-lg font-semibold text-slate-900 mb-3">
+                      Professional Categories
+                    </h3>
+                    <div className="flex items-center gap-3 flex-wrap">
+                      {talent.skillTags.map((tag) => (
+                        <SkillTag key={`${talent.id}-tag-${tag}`} type={tag} size="md" showDescription={true} />
+                      ))}
+                    </div>
+                    <div className="mt-3 text-sm text-gray-600">
+                      <p><strong>F</strong> = Fotografia • <strong>E</strong> = Eventos • <strong>O</strong> = Online • <strong>R</strong> = Rádio/TV</p>
+                    </div>
+                  </div>
+
+                  {/* Specialties and Skills */}
                   <div className="bg-white rounded-xl p-4 shadow-sm border border-slate-200">
                     <h3 className="text-lg font-semibold text-slate-900 mb-3">
                       Specialties and Skills

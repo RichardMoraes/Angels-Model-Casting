@@ -77,7 +77,7 @@ const SkillTag = memo(function SkillTag({
       `}
       title={showDescription ? undefined : config.description}
     >
-      {type}
+      {showDescription ? `${type} - ${config.description}` : type}
     </span>
   );
 });
