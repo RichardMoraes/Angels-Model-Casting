@@ -4,7 +4,7 @@ import { useState, memo } from "react";
 import { TalentProfile } from "../types/TalentProfile";
 import { Card, CardContent } from "../../components/ui/card";
 import Image from "next/image";
-import { MapPin, Calendar, Ruler, Weight, Eye, User } from "lucide-react";
+import { MapPin, Calendar, Ruler, Weight, Eye, User, ChevronLeft, ChevronRight } from "lucide-react";
 import StarRating from "./StarRating";
 import SkillTag from "./SkillTag";
 import StatusIndicator from "./StatusIndicator";
@@ -32,11 +32,15 @@ const TalentCard = memo(function TalentCard({
 }: TalentCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
 
+  // Get current photo URL
+  const currentPhotoUrl = talent.photos[currentPhotoIndex] || talent.mainPhotoUrl;
+  
   // Fallback to placeholder image if external image fails
   const imageSrc = imageError 
     ? `/api/placeholder/400/288?text=${encodeURIComponent(talent.name.charAt(0))}`
-    : talent.mainPhotoUrl;
+    : currentPhotoUrl;
 
   /**
    * Handles image loading errors by switching to placeholder
@@ -44,6 +48,30 @@ const TalentCard = memo(function TalentCard({
   const handleImageError = () => {
     setImageError(true);
     setImageLoaded(true);
+  };
+
+  /**
+   * Navigate to previous photo
+   */
+  const handlePreviousPhoto = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click
+    setCurrentPhotoIndex((prev) => 
+      prev === 0 ? talent.photos.length - 1 : prev - 1
+    );
+    setImageLoaded(false);
+    setImageError(false);
+  };
+
+  /**
+   * Navigate to next photo
+   */
+  const handleNextPhoto = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click
+    setCurrentPhotoIndex((prev) => 
+      prev === talent.photos.length - 1 ? 0 : prev + 1
+    );
+    setImageLoaded(false);
+    setImageError(false);
   };
 
   return (
@@ -60,19 +88,49 @@ const TalentCard = memo(function TalentCard({
           </div>
         )}
 
-                <Image
-                  src={imageSrc}
-                  alt={`Foto de ${talent.name}`}
-                  width={400}
-                  height={288}
-                  className={`w-full h-full object-cover group-hover:scale-110 transition-all duration-700 ${
-                    imageLoaded ? "opacity-100" : "opacity-0"
-                  }`}
-                  priority={isPriority}
-                  loading={isPriority ? "eager" : "lazy"}
-                  onLoad={() => setImageLoaded(true)}
-                  onError={handleImageError}
-                />
+        <Image
+          src={imageSrc}
+          alt={`Foto de ${talent.name}`}
+          width={400}
+          height={288}
+          className={`w-full h-full object-cover group-hover:scale-110 transition-all duration-700 ${
+            imageLoaded ? "opacity-100" : "opacity-0"
+          }`}
+          priority={isPriority}
+          loading={isPriority ? "eager" : "lazy"}
+          onLoad={() => setImageLoaded(true)}
+          onError={handleImageError}
+        />
+        
+        {/* Photo Navigation Arrows */}
+        {talent.photos.length > 1 && (
+          <>
+            {/* Previous Photo Button */}
+            <button
+              onClick={handlePreviousPhoto}
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 z-20"
+              aria-label="Previous photo"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+
+            {/* Next Photo Button */}
+            <button
+              onClick={handleNextPhoto}
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 z-20"
+              aria-label="Next photo"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </>
+        )}
+
+        {/* Photo Counter */}
+        {talent.photos.length > 1 && (
+          <div className="absolute top-3 right-3 bg-black/50 text-white px-2 py-1 rounded-full text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+            {currentPhotoIndex + 1}/{talent.photos.length}
+          </div>
+        )}
         
         {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
