@@ -160,11 +160,6 @@ export default function CastingVitrine() {
     setCurrentPage(1);
   }, []);
 
-  const handleAgeRangeChange = useCallback((value: string) => {
-    setSelectedAgeRange(value);
-    setCurrentPage(1);
-  }, []);
-
   const handlePageChange = useCallback((page: number) => {
     setCurrentPage(page);
   }, []);
@@ -184,7 +179,6 @@ export default function CastingVitrine() {
         selectedGender={selectedGender}
         onGenderChange={handleGenderChange}
         selectedAgeRange={selectedAgeRange}
-        onAgeRangeChange={handleAgeRangeChange}
         onClearFilters={handleClearFilters}
         totalResults={filteredTalents.length}
       />

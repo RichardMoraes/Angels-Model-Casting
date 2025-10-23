@@ -35,8 +35,6 @@ interface AdvancedFiltersProps {
   readonly onSearchChange: (value: string) => void;
   /** Callback for gender filter changes */
   readonly onGenderChange: (value: string) => void;
-  /** Callback for age range filter changes */
-  readonly onAgeRangeChange: (value: string) => void;
   /** Callback to clear all filters */
   readonly onClearFilters: () => void;
   /** Total number of results */
@@ -53,7 +51,6 @@ const AdvancedFilters = memo(function AdvancedFilters({
   selectedAgeRange,
   onSearchChange,
   onGenderChange,
-  onAgeRangeChange,
   onClearFilters,
   totalResults,
 }: AdvancedFiltersProps) {

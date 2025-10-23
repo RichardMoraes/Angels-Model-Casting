@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, memo, useCallback } from "react";
 import { CheckCircle, XCircle, AlertCircle, Info, X } from "lucide-react";
 
 export type ToastType = "success" | "error" | "warning" | "info";
@@ -24,6 +24,11 @@ const Toast = memo(function Toast({
 }: ToastProps) {
   const [isVisible, setIsVisible] = useState(false);
 
+  const handleClose = useCallback(() => {
+    setIsVisible(false);
+    setTimeout(() => onClose(id), 300); // Wait for exit animation
+  }, [onClose, id]);
+
   useEffect(() => {
     // Trigger entrance animation
     const timer = setTimeout(() => setIsVisible(true), 100);
@@ -37,12 +42,7 @@ const Toast = memo(function Toast({
       clearTimeout(timer);
       clearTimeout(closeTimer);
     };
-  }, [duration]);
-
-  const handleClose = () => {
-    setIsVisible(false);
-    setTimeout(() => onClose(id), 300); // Wait for exit animation
-  };
+  }, [duration, handleClose]);
 
   const icons = {
     success: CheckCircle,
