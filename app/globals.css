@@ -561,62 +561,23 @@ body {
   transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Custom Sidebar Animations - Override Radix UI */
-[data-slot="sheet-content"] {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease-in-out !important;
-}
-
-[data-slot="sheet-content"][data-state="open"] {
-  transform: translateX(0) !important;
-  opacity: 1 !important;
-}
-
-[data-slot="sheet-content"][data-state="closed"] {
+/* Custom Sidebar Animations - Simplified Approach */
+[data-radix-dialog-content] {
   transform: translateX(100%) !important;
-  opacity: 0 !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-[data-slot="sheet-overlay"] {
+[data-radix-dialog-content][data-state="open"] {
+  transform: translateX(0) !important;
+}
+
+[data-radix-dialog-overlay] {
+  opacity: 0 !important;
   transition: opacity 0.3s ease-in-out !important;
 }
 
-[data-slot="sheet-overlay"][data-state="open"] {
+[data-radix-dialog-overlay][data-state="open"] {
   opacity: 1 !important;
-}
-
-[data-slot="sheet-overlay"][data-state="closed"] {
-  opacity: 0 !important;
-}
-
-/* Enhanced Sidebar Content Animations */
-.sidebar-content {
-  animation: slideInFromRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.sidebar-content.closing {
-  animation: slideOutToRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes slideInFromRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideOutToRight {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(100%);
-    opacity: 0;
-  }
 }
 
 

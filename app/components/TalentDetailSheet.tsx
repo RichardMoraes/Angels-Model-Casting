@@ -60,7 +60,6 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
   const [imageErrorStates, setImageErrorStates] = useState<
     Record<string, boolean>
   >({});
-  const [isClosing, setIsClosing] = useState(false);
 
   /**
    * Handles successful image loading
@@ -77,36 +76,25 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
     setImageLoadedStates((prev) => ({ ...prev, [imageKey]: true }));
   };
 
-  /**
-   * Handles sheet close with animation
-   */
-  const handleClose = () => {
-    setIsClosing(true);
-    setTimeout(() => {
-      onClose();
-      setIsClosing(false);
-    }, 400); // Match animation duration
-  };
-
   // Always render the Sheet, but control visibility with isOpen prop
   return (
-    <Sheet open={isOpen} onOpenChange={handleClose}>
+    <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent
         side="right"
-        className={`w-full sm:w-[70vw] md:w-[65vw] lg:w-[60vw] xl:w-[55vw] 2xl:w-[50vw] overflow-y-auto bg-gray-50 p-0 sidebar-content ${isClosing ? 'closing' : ''}`}
+        className={`w-full sm:w-[70vw] md:w-[65vw] lg:w-[60vw] xl:w-[55vw] 2xl:w-[50vw] overflow-y-auto bg-gray-50 p-0`}
       >
         {talent && (
           <>
             {/* Custom Close Button */}
             <button
-              onClick={handleClose}
+              onClick={onClose}
               className="absolute top-4 right-4 z-50 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110 btn-interactive"
             >
               <X className="w-4 h-4 text-slate-700" />
             </button>
 
             {/* Header Section with Photo */}
-            <div className="relative bg-corporate-gradient text-white pt-12 pb-6 px-4 lg:pt-20 lg:pb-8 lg:px-10 animate-fade-in-scale">
+            <div className="relative bg-corporate-gradient text-white pt-12 pb-6 px-4 lg:pt-20 lg:pb-8 lg:px-10">
               {/* Background Photo */}
               <div className="absolute inset-0 overflow-hidden">
                 {imageErrorStates["background"] ? (
@@ -208,7 +196,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
             </div>
 
             {/* Content Area */}
-            <div className="px-4 lg:px-10 py-6 lg:py-8 animate-slide-in-left">
+            <div className="px-4 lg:px-10 py-6 lg:py-8">
               <Tabs defaultValue="summary" className="space-y-6 lg:space-y-8">
                 <TabsList className="flex w-full bg-white shadow-professional-sm p-3 rounded-xl gap-1 mx-0">
                   <TabsTrigger
