@@ -60,6 +60,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
   const [imageErrorStates, setImageErrorStates] = useState<
     Record<string, boolean>
   >({});
+  const [isAnimating, setIsAnimating] = useState(false);
 
   /**
    * Handles successful image loading
@@ -76,12 +77,28 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
     setImageLoadedStates((prev) => ({ ...prev, [imageKey]: true }));
   };
 
+  /**
+   * Handle sheet state changes with animation control
+   */
+  const handleOpenChange = (open: boolean) => {
+    if (!open) {
+      setIsAnimating(true);
+      // Delay the actual close to allow animation
+      setTimeout(() => {
+        onClose();
+        setIsAnimating(false);
+      }, 300);
+    } else {
+      setIsAnimating(false);
+    }
+  };
+
   // Always render the Sheet, but control visibility with isOpen prop
   return (
-    <Sheet open={isOpen} onOpenChange={onClose}>
+    <Sheet open={isOpen} onOpenChange={handleOpenChange}>
       <SheetContent
         side="right"
-        className={`w-full sm:w-[70vw] md:w-[65vw] lg:w-[60vw] xl:w-[55vw] 2xl:w-[50vw] overflow-y-auto bg-gray-50 p-0`}
+        className={`w-full sm:w-[70vw] md:w-[65vw] lg:w-[60vw] xl:w-[55vw] 2xl:w-[50vw] overflow-y-auto bg-gray-50 p-0 custom-sidebar ${isAnimating ? 'animating-out' : 'animating-in'}`}
       >
         {talent && (
           <>

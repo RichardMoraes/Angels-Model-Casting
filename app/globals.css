@@ -625,3 +625,63 @@ body {
 [data-radix-dialog-overlay][data-slot="sheet-overlay"][data-state="open"] {
   opacity: 1 !important;
 }
+
+/* Debug approach - Try all possible selectors */
+[data-radix-dialog-content] {
+  transform: translateX(100%) !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[data-radix-dialog-content][data-state="open"] {
+  transform: translateX(0) !important;
+}
+
+[data-radix-dialog-overlay] {
+  opacity: 0 !important;
+  transition: opacity 0.3s ease-in-out !important;
+}
+
+[data-radix-dialog-overlay][data-state="open"] {
+  opacity: 1 !important;
+}
+
+/* Universal approach - Target any dialog content */
+[role="dialog"] {
+  transform: translateX(100%) !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[role="dialog"][data-state="open"] {
+  transform: translateX(0) !important;
+}
+
+/* Custom sidebar class approach */
+.custom-sidebar {
+  transform: translateX(100%) !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.custom-sidebar[data-state="open"] {
+  transform: translateX(0) !important;
+}
+
+/* Force animation with higher specificity */
+.custom-sidebar[data-slot="sheet-content"] {
+  transform: translateX(100%) !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.custom-sidebar[data-slot="sheet-content"][data-state="open"] {
+  transform: translateX(0) !important;
+}
+
+/* Animation state classes */
+.custom-sidebar.animating-out {
+  transform: translateX(100%) !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.custom-sidebar.animating-in {
+  transform: translateX(0) !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
