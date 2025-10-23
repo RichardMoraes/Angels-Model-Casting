@@ -21,17 +21,32 @@ import {
   Star
 } from "lucide-react";
 
+/**
+ * Props for the AdvancedFilters component
+ */
 interface AdvancedFiltersProps {
+  /** Current search term */
   readonly searchTerm: string;
+  /** Currently selected gender filter */
   readonly selectedGender: string;
+  /** Currently selected age range filter */
   readonly selectedAgeRange: string;
+  /** Callback for search term changes */
   readonly onSearchChange: (value: string) => void;
+  /** Callback for gender filter changes */
   readonly onGenderChange: (value: string) => void;
+  /** Callback for age range filter changes */
   readonly onAgeRangeChange: (value: string) => void;
+  /** Callback to clear all filters */
   readonly onClearFilters: () => void;
+  /** Total number of results */
   readonly totalResults: number;
 }
 
+/**
+ * Advanced filtering component with multiple filter options
+ * Features search, gender, age range, ethnicity, DRT status, and location filters
+ */
 const AdvancedFilters = memo(function AdvancedFilters({
   searchTerm,
   selectedGender,
@@ -57,7 +72,7 @@ const AdvancedFilters = memo(function AdvancedFilters({
             <div className="relative sm:col-span-2 lg:col-span-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
               <Input
-                placeholder="Buscar por nome..."
+                placeholder="Search by name..."
                 value={searchTerm}
                 onChange={(e) => onSearchChange(e.target.value)}
                 className="pl-10 h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white"
@@ -67,12 +82,12 @@ const AdvancedFilters = memo(function AdvancedFilters({
             {/* Age Range */}
             <div className="flex items-center gap-2">
               <Input
-                placeholder="De"
+                placeholder="From"
                 className="w-16 sm:w-20 h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white text-center text-sm px-1 sm:px-2"
               />
-              <span className="text-slate-500 text-xs sm:text-sm whitespace-nowrap">até</span>
+              <span className="text-slate-500 text-xs sm:text-sm whitespace-nowrap">to</span>
               <Input
-                placeholder="Até"
+                placeholder="To"
                 className="w-16 sm:w-20 h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white text-center text-sm px-1 sm:px-2"
               />
             </div>
@@ -80,13 +95,13 @@ const AdvancedFilters = memo(function AdvancedFilters({
             {/* Gender Select */}
             <Select value={selectedGender} onValueChange={onGenderChange}>
               <SelectTrigger className="w-full h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white">
-                <SelectValue placeholder="Gênero" />
+                <SelectValue placeholder="Gender" />
               </SelectTrigger>
               <SelectContent className="rounded-lg border-slate-200">
-                <SelectItem value="all">Todos</SelectItem>
-                <SelectItem value="Female">Feminino</SelectItem>
-                <SelectItem value="Male">Masculino</SelectItem>
-                <SelectItem value="Non-binary">Não-binário</SelectItem>
+                <SelectItem value="all">All</SelectItem>
+                <SelectItem value="Female">Female</SelectItem>
+                <SelectItem value="Male">Male</SelectItem>
+                <SelectItem value="Non-binary">Non-binary</SelectItem>
               </SelectContent>
             </Select>
 
@@ -94,7 +109,7 @@ const AdvancedFilters = memo(function AdvancedFilters({
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
               <Input
-                placeholder="Busca Geral"
+                placeholder="General Search"
                 className="pl-10 w-full h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white"
               />
             </div>
@@ -106,14 +121,14 @@ const AdvancedFilters = memo(function AdvancedFilters({
             {/* Additional Filters */}
             <Select>
               <SelectTrigger className="w-full h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white">
-                <SelectValue placeholder="Etnia" />
+                <SelectValue placeholder="Ethnicity" />
               </SelectTrigger>
               <SelectContent className="rounded-lg border-slate-200">
-                <SelectItem value="all">Todas</SelectItem>
-                <SelectItem value="branca">Branca</SelectItem>
-                <SelectItem value="negra">Negra</SelectItem>
-                <SelectItem value="parda">Parda</SelectItem>
-                <SelectItem value="asiatica">Asiática</SelectItem>
+                <SelectItem value="all">All</SelectItem>
+                <SelectItem value="branca">White</SelectItem>
+                <SelectItem value="negra">Black</SelectItem>
+                <SelectItem value="parda">Mixed</SelectItem>
+                <SelectItem value="asiatica">Asian</SelectItem>
               </SelectContent>
             </Select>
 
@@ -122,30 +137,30 @@ const AdvancedFilters = memo(function AdvancedFilters({
                 <SelectValue placeholder="DRT" />
               </SelectTrigger>
               <SelectContent className="rounded-lg border-slate-200">
-                <SelectItem value="all">Todos</SelectItem>
-                <SelectItem value="sim">Sim</SelectItem>
-                <SelectItem value="nao">Não</SelectItem>
+                <SelectItem value="all">All</SelectItem>
+                <SelectItem value="sim">Yes</SelectItem>
+                <SelectItem value="nao">No</SelectItem>
               </SelectContent>
             </Select>
 
             <Select>
               <SelectTrigger className="w-full h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white">
-                <SelectValue placeholder="Atuação" />
+                <SelectValue placeholder="Performance" />
               </SelectTrigger>
               <SelectContent className="rounded-lg border-slate-200">
-                <SelectItem value="all">Todas</SelectItem>
-                <SelectItem value="modelo">Modelo</SelectItem>
-                <SelectItem value="ator">Ator</SelectItem>
-                <SelectItem value="apresentador">Apresentador</SelectItem>
+                <SelectItem value="all">All</SelectItem>
+                <SelectItem value="modelo">Model</SelectItem>
+                <SelectItem value="ator">Actor</SelectItem>
+                <SelectItem value="apresentador">Presenter</SelectItem>
               </SelectContent>
             </Select>
 
             <Select>
               <SelectTrigger className="w-full h-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white">
-                <SelectValue placeholder="Onde Mora" />
+                <SelectValue placeholder="Location" />
               </SelectTrigger>
               <SelectContent className="rounded-lg border-slate-200">
-                <SelectItem value="all">Todos</SelectItem>
+                <SelectItem value="all">All</SelectItem>
                 <SelectItem value="sp">São Paulo</SelectItem>
                 <SelectItem value="rj">Rio de Janeiro</SelectItem>
                 <SelectItem value="pr">Paraná</SelectItem>
@@ -186,7 +201,7 @@ const AdvancedFilters = memo(function AdvancedFilters({
                 className="h-8 px-3 border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 flex items-center gap-1 whitespace-nowrap ml-2"
               >
                 <X className="h-3 w-3" />
-                <span className="text-xs">Limpar</span>
+                <span className="text-xs">Clear</span>
               </Button>
             )}
           </div>
@@ -194,12 +209,12 @@ const AdvancedFilters = memo(function AdvancedFilters({
           {/* Right Side - Results and Premium */}
           <div className="flex items-center gap-4">
             <span className="text-sm font-medium text-slate-600 whitespace-nowrap">
-              {totalResults.toLocaleString()} elencos
+              {totalResults.toLocaleString()} talents
             </span>
             
                     <Button className="h-8 bg-gradient-to-r from-purple-500 to-purple-600 hover:shadow-lg text-white px-4 rounded-lg font-medium flex items-center gap-2 whitespace-nowrap hover-scale transition-all duration-300">
                       <Star className="h-4 w-4" />
-                      <span className="hidden lg:inline">AZ Elenco Premium</span>
+                      <span className="hidden lg:inline">AZ Talent Premium</span>
                       <span className="lg:hidden">Premium</span>
                     </Button>
           </div>
@@ -208,19 +223,19 @@ const AdvancedFilters = memo(function AdvancedFilters({
         {/* Secondary Filter Row (Optional) */}
         <div className="mt-3 pt-3 border-t border-slate-100">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-            <span className="text-sm text-slate-500 whitespace-nowrap">Filtros rápidos:</span>
+            <span className="text-sm text-slate-500 whitespace-nowrap">Quick filters:</span>
                     <div className="flex items-center gap-2 flex-wrap">
                       <Button variant="outline" size="sm" className="h-7 px-3 text-xs border-slate-200 hover:bg-slate-50 hover-scale transition-all duration-200">
-                        Novos
+                        New
                       </Button>
                       <Button variant="outline" size="sm" className="h-7 px-3 text-xs border-slate-200 hover:bg-slate-50 hover-scale transition-all duration-200">
                         Premium
                       </Button>
                       <Button variant="outline" size="sm" className="h-7 px-3 text-xs border-slate-200 hover:bg-slate-50 hover-scale transition-all duration-200">
-                        Disponíveis
+                        Available
                       </Button>
                       <Button variant="outline" size="sm" className="h-7 px-3 text-xs border-slate-200 hover:bg-slate-50 hover-scale transition-all duration-200">
-                        Com DRT
+                        With DRT
                       </Button>
                     </div>
           </div>

@@ -1,5 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+/**
+ * API route for generating placeholder images
+ * Creates SVG placeholders with customizable dimensions and text
+ * 
+ * @param request - The incoming request
+ * @param params - Route parameters containing width, height, and optional text
+ * @returns SVG image response with proper caching headers
+ */
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ params: string[] }> }

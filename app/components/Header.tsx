@@ -3,11 +3,20 @@
 import { useState } from "react";
 import { Bell, Settings, User, ChevronDown, Search } from "lucide-react";
 
+/**
+ * Props for the Header component
+ */
 interface HeaderProps {
+  /** Total number of talents in the system */
   readonly totalTalents: number;
+  /** Number of talents matching current filters */
   readonly filteredTalents: number;
 }
 
+/**
+ * Main application header component
+ * Features navigation, user menu, notifications, and system status
+ */
 export default function Header({ totalTalents, filteredTalents }: HeaderProps) {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isStatsMenuOpen, setIsStatsMenuOpen] = useState(false);
@@ -23,7 +32,7 @@ export default function Header({ totalTalents, filteredTalents }: HeaderProps) {
                 <span className="text-white font-bold text-lg">V</span>
               </div>
               <h1 className="text-2xl font-bold text-white tracking-tight">
-                Vitrine de Talentos
+                Talent Showcase
               </h1>
             </div>
           </div>
@@ -35,38 +44,35 @@ export default function Header({ totalTalents, filteredTalents }: HeaderProps) {
                 onClick={() => setIsStatsMenuOpen(!isStatsMenuOpen)}
                 className="flex items-center space-x-1 text-white hover:text-blue-300 transition-colors duration-200"
               >
-                <span>Estatísticas</span>
+                <span>Statistics</span>
                 <ChevronDown className="w-4 h-4" />
               </button>
               {isStatsMenuOpen && (
                 <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-slate-200 py-2 z-50">
                   <button className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">
-                    Visão Geral
+                    Overview
                   </button>
                   <button className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">
-                    Talentos Ativos
+                    Active Talents
                   </button>
                   <button className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">
-                    Relatórios
+                    Reports
                   </button>
                 </div>
               )}
             </div>
 
             <button className="text-white hover:text-blue-300 transition-colors duration-200">
-              CAST
+              Jobs
             </button>
             <button className="text-white hover:text-blue-300 transition-colors duration-200">
-              Trabalhos
+              Selections
             </button>
             <button className="text-white hover:text-blue-300 transition-colors duration-200">
-              Seleções
+              Registration
             </button>
             <button className="text-white hover:text-blue-300 transition-colors duration-200">
-              Cadastro
-            </button>
-            <button className="text-white hover:text-blue-300 transition-colors duration-200">
-              Diretores
+              Directors
             </button>
           </nav>
 
@@ -101,17 +107,17 @@ export default function Header({ totalTalents, filteredTalents }: HeaderProps) {
               {isUserMenuOpen && (
                 <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-slate-200 py-2 z-50">
                   <button className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">
-                    Meu Perfil
+                    My Profile
                   </button>
                   <button className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">
-                    Configurações
+                    Settings
                   </button>
                   <button className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">
-                    Produto...
+                    Product...
                   </button>
                   <hr className="my-2" />
                   <button className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">
-                    Sair
+                    Sign Out
                   </button>
                 </div>
               )}
@@ -128,16 +134,16 @@ export default function Header({ totalTalents, filteredTalents }: HeaderProps) {
         <div className="flex items-center justify-between py-2 border-t border-purple-800/30">
           <div className="flex items-center space-x-4 text-sm text-purple-200">
             <span className="font-medium">
-              {filteredTalents.toLocaleString()} talentos encontrados
+              {filteredTalents.toLocaleString()} talents found
             </span>
             <span className="text-purple-300">
-              de {totalTalents.toLocaleString()} total
+              of {totalTalents.toLocaleString()} total
             </span>
           </div>
 
           <div className="flex items-center space-x-2 text-sm text-purple-200">
             <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-            <span>Sistema Online</span>
+            <span>System Online</span>
           </div>
         </div>
       </div>

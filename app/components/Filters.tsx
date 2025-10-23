@@ -12,16 +12,30 @@ import {
 import { Button } from "../../components/ui/button";
 import { Search, X } from "lucide-react";
 
+/**
+ * Props for the Filters component
+ */
 interface FiltersProps {
+  /** Current search term */
   readonly searchTerm: string;
+  /** Currently selected gender filter */
   readonly selectedGender: string;
+  /** Currently selected age range filter */
   readonly selectedAgeRange: string;
+  /** Callback for search term changes */
   readonly onSearchChange: (value: string) => void;
+  /** Callback for gender filter changes */
   readonly onGenderChange: (value: string) => void;
+  /** Callback for age range filter changes */
   readonly onAgeRangeChange: (value: string) => void;
+  /** Callback to clear all filters */
   readonly onClearFilters: () => void;
 }
 
+/**
+ * Basic filtering component with search, gender, and age range filters
+ * Features animated transitions and responsive design
+ */
 const Filters = memo(function Filters({
   searchTerm,
   selectedGender,
@@ -40,7 +54,7 @@ const Filters = memo(function Filters({
           <div className="h-8 w-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center animate-pulse">
             <Search className="h-4 w-4 text-white" />
           </div>
-          <h2 className="text-xl font-bold text-slate-900">Filtros</h2>
+          <h2 className="text-xl font-bold text-slate-900">Filters</h2>
         </div>
         {hasActiveFilters && (
           <Button
@@ -50,7 +64,7 @@ const Filters = memo(function Filters({
             className="flex items-center gap-2 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-all duration-200 animate-in fade-in-0 slide-in-from-right-4"
           >
             <X className="h-4 w-4" />
-            Limpar filtros
+            Clear filters
           </Button>
         )}
       </div>
@@ -65,13 +79,13 @@ const Filters = memo(function Filters({
             htmlFor="search-input"
             className="text-sm font-semibold text-slate-700"
           >
-            Buscar por nome
+            Search by name
           </label>
           <div className="relative group">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400 transition-colors duration-200 group-focus-within:text-blue-500" />
             <Input
               id="search-input"
-              placeholder="Digite o nome do talento..."
+              placeholder="Enter talent name..."
               value={searchTerm}
               onChange={(e) => onSearchChange(e.target.value)}
               className="pl-12 h-12 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-xl bg-white/50 backdrop-blur-sm transition-all duration-200 hover:bg-white/70 focus:bg-white/90"
@@ -88,20 +102,20 @@ const Filters = memo(function Filters({
             htmlFor="gender-select"
             className="text-sm font-semibold text-slate-700"
           >
-            Gênero
+            Gender
           </label>
           <Select value={selectedGender} onValueChange={onGenderChange}>
             <SelectTrigger
               id="gender-select"
               className="h-12 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-xl bg-white/50 backdrop-blur-sm transition-all duration-200 hover:bg-white/70 focus:bg-white/90"
             >
-              <SelectValue placeholder="Todos os gêneros" />
+              <SelectValue placeholder="All genders" />
             </SelectTrigger>
             <SelectContent className="rounded-xl border-slate-200">
-              <SelectItem value="all">Todos os gêneros</SelectItem>
-              <SelectItem value="Female">Feminino</SelectItem>
-              <SelectItem value="Male">Masculino</SelectItem>
-              <SelectItem value="Non-binary">Não-binário</SelectItem>
+              <SelectItem value="all">All genders</SelectItem>
+              <SelectItem value="Female">Female</SelectItem>
+              <SelectItem value="Male">Male</SelectItem>
+              <SelectItem value="Non-binary">Non-binary</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -115,21 +129,21 @@ const Filters = memo(function Filters({
             htmlFor="age-select"
             className="text-sm font-semibold text-slate-700"
           >
-            Faixa Etária
+            Age Range
           </label>
           <Select value={selectedAgeRange} onValueChange={onAgeRangeChange}>
             <SelectTrigger
               id="age-select"
               className="h-12 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-xl bg-white/50 backdrop-blur-sm transition-all duration-200 hover:bg-white/70 focus:bg-white/90"
             >
-              <SelectValue placeholder="Todas as idades" />
+              <SelectValue placeholder="All ages" />
             </SelectTrigger>
             <SelectContent className="rounded-xl border-slate-200">
-              <SelectItem value="all">Todas as idades</SelectItem>
-              <SelectItem value="18-25">18-25 anos</SelectItem>
-              <SelectItem value="26-35">26-35 anos</SelectItem>
-              <SelectItem value="36-45">36-45 anos</SelectItem>
-              <SelectItem value="45+">45+ anos</SelectItem>
+              <SelectItem value="all">All ages</SelectItem>
+              <SelectItem value="18-25">18-25 years</SelectItem>
+              <SelectItem value="26-35">26-35 years</SelectItem>
+              <SelectItem value="36-45">36-45 years</SelectItem>
+              <SelectItem value="45+">45+ years</SelectItem>
             </SelectContent>
           </Select>
         </div>

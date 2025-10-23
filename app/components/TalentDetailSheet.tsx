@@ -32,12 +32,22 @@ import {
   X,
 } from "lucide-react";
 
+/**
+ * Props for the TalentDetailSheet component
+ */
 interface TalentDetailSheetProps {
+  /** Talent profile data to display */
   readonly talent: TalentProfile | null;
+  /** Whether the sheet is open */
   readonly isOpen: boolean;
+  /** Callback function when sheet is closed */
   readonly onClose: () => void;
 }
 
+/**
+ * Detailed sidebar component for displaying comprehensive talent information
+ * Features tabs for different content sections, image galleries, and contact info
+ */
 const TalentDetailSheet = memo(function TalentDetailSheet({
   talent,
   isOpen,
@@ -50,16 +60,22 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
     Record<string, boolean>
   >({});
 
+  /**
+   * Handles successful image loading
+   */
   const handleImageLoad = (imageKey: string) => {
     setImageLoadedStates((prev) => ({ ...prev, [imageKey]: true }));
   };
 
+  /**
+   * Handles image loading errors by switching to placeholder
+   */
   const handleImageError = (imageKey: string) => {
     setImageErrorStates((prev) => ({ ...prev, [imageKey]: true }));
     setImageLoadedStates((prev) => ({ ...prev, [imageKey]: true }));
   };
 
-  // Always render the Sheet, but control visibility with isOpen
+  // Always render the Sheet, but control visibility with isOpen prop
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent
@@ -80,22 +96,22 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
             <div className="relative bg-gradient-to-r from-slate-900 to-slate-700 text-white pt-12 pb-6 px-4 lg:pt-20 lg:pb-10 lg:px-10">
               {/* Background Photo */}
               <div className="absolute inset-0 overflow-hidden">
-                {!imageErrorStates["background"] ? (
+                {imageErrorStates["background"] ? (
+                  <div className="w-full h-full bg-gradient-to-br from-slate-800 to-slate-600 flex items-center justify-center">
+                    <div className="text-6xl font-bold text-white/30">
+                      {talent.name.charAt(0)}
+                    </div>
+                  </div>
+                ) : (
                   <Image
                     src={talent.mainPhotoUrl}
-                    alt={`Foto de ${talent.name}`}
+                    alt={`Photo of ${talent.name}`}
                     fill
                     className="object-cover opacity-20"
                     priority
                     onLoad={() => handleImageLoad("background")}
                     onError={() => handleImageError("background")}
                   />
-                ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-slate-800 to-slate-600 flex items-center justify-center">
-                    <div className="text-6xl font-bold text-white/30">
-                      {talent.name.charAt(0)}
-                    </div>
-                  </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-700/80"></div>
               </div>
@@ -106,22 +122,22 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                   {/* Profile Photo */}
                   <div className="shrink-0 mx-auto lg:mx-0">
                     <div className="relative w-20 h-20 lg:w-32 lg:h-32 rounded-full overflow-hidden border-4 border-white/30 shadow-xl">
-                      {!imageErrorStates["profile"] ? (
+                      {imageErrorStates["profile"] ? (
+                        <div className="w-full h-full bg-gradient-to-br from-slate-700 to-slate-600 flex items-center justify-center">
+                          <div className="text-2xl lg:text-5xl font-bold text-white">
+                            {talent.name.charAt(0)}
+                          </div>
+                        </div>
+                      ) : (
                         <Image
                           src={talent.mainPhotoUrl}
-                          alt={`Foto de ${talent.name}`}
+                          alt={`Photo of ${talent.name}`}
                           fill
                           className="object-cover"
                           priority
                           onLoad={() => handleImageLoad("profile")}
                           onError={() => handleImageError("profile")}
                         />
-                      ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-slate-700 to-slate-600 flex items-center justify-center">
-                          <div className="text-2xl lg:text-5xl font-bold text-white">
-                            {talent.name.charAt(0)}
-                          </div>
-                        </div>
                       )}
                     </div>
                   </div>
@@ -132,23 +148,23 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                       {talent.name}
                     </SheetTitle>
                     <SheetDescription className="text-slate-200 text-base lg:text-xl mb-4">
-                      {talent.age} anos • {talent.city}, {talent.state}
+                      {talent.age} years • {talent.city}, {talent.state}
                     </SheetDescription>
                     <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 lg:gap-4 mb-4">
                       <span className="px-3 py-1.5 bg-white/20 text-white text-xs lg:text-sm font-medium rounded-full border border-white/30">
                         {(() => {
                           switch (talent.gender) {
                             case "Female":
-                              return "Feminino";
+                              return "Female";
                             case "Male":
-                              return "Masculino";
+                              return "Male";
                             default:
-                              return "Não-binário";
+                              return "Non-binary";
                           }
                         })()}
                       </span>
                       <span className="px-3 py-1.5 bg-emerald-500/20 text-emerald-200 text-xs md:text-sm font-medium rounded-full border border-emerald-400/30">
-                        Disponível
+                        Available
                       </span>
                     </div>
                   </div>
@@ -161,7 +177,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                       className="bg-white/10 border-white/30 text-white hover:bg-white/20 px-3 lg:px-6 py-2 text-xs lg:text-sm"
                     >
                       <Heart className="w-3 h-3 lg:w-5 lg:h-5 mr-1 lg:mr-2" />
-                      <span className="hidden lg:inline">Favoritar</span>
+                      <span className="hidden lg:inline">Favorite</span>
                       <span className="lg:hidden">♥</span>
                     </Button>
                     <Button
@@ -170,7 +186,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                       className="bg-white/10 border-white/30 text-white hover:bg-white/20 px-3 lg:px-6 py-2 text-xs lg:text-sm"
                     >
                       <Share2 className="w-3 h-3 lg:w-5 lg:h-5 mr-1 lg:mr-2" />
-                      <span className="hidden lg:inline">Compartilhar</span>
+                      <span className="hidden lg:inline">Share</span>
                       <span className="lg:hidden">↗</span>
                     </Button>
                   </div>
@@ -186,33 +202,33 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                     value="summary"
                     className="data-[state=active]:bg-blue-500 data-[state=active]:text-white px-1 md:px-2 py-2 text-xs md:text-sm"
                   >
-                    <span className="hidden lg:inline">Resumo</span>
-                    <span className="lg:hidden">Resumo</span>
+                    <span className="hidden lg:inline">Summary</span>
+                    <span className="lg:hidden">Summary</span>
                   </TabsTrigger>
                   <TabsTrigger
                     value="photos"
                     className="data-[state=active]:bg-blue-500 data-[state=active]:text-white px-1 md:px-2 py-2 text-xs md:text-sm"
                   >
                     <span className="hidden lg:inline">
-                      Fotos ({talent.photos.length})
+                      Photos ({talent.photos.length})
                     </span>
-                    <span className="lg:hidden">Fotos</span>
+                    <span className="lg:hidden">Photos</span>
                   </TabsTrigger>
                   <TabsTrigger
                     value="videos"
                     className="data-[state=active]:bg-blue-500 data-[state=active]:text-white px-1 md:px-2 py-2 text-xs md:text-sm"
                   >
                     <span className="hidden lg:inline">
-                      Vídeos ({talent.videos.length})
+                      Videos ({talent.videos.length})
                     </span>
-                    <span className="lg:hidden">Vídeos</span>
+                    <span className="lg:hidden">Videos</span>
                   </TabsTrigger>
                   <TabsTrigger
                     value="skills"
                     className="data-[state=active]:bg-blue-500 data-[state=active]:text-white px-1 md:px-2 py-2 text-xs md:text-sm"
                   >
                     <span className="hidden lg:inline">
-                      Habilidades ({talent.skills.length})
+                      Skills ({talent.skills.length})
                     </span>
                     <span className="lg:hidden">Skills</span>
                   </TabsTrigger>
@@ -223,7 +239,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                   <div className="bg-white rounded-xl p-3 lg:p-8 shadow-sm border border-slate-200">
                     <h3 className="text-base lg:text-xl font-semibold text-slate-900 mb-2 lg:mb-4 flex items-center">
                       <MessageCircle className="w-4 h-4 lg:w-6 lg:h-6 mr-2 lg:mr-3 text-blue-500" />
-                      Informações de Contato
+                      Contact Information
                     </h3>
                     <div className="grid grid-cols-1 gap-3 sm:gap-4">
                       <div className="flex items-center gap-3 p-2 lg:p-4 bg-slate-50 rounded-lg border border-slate-200">
@@ -246,7 +262,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                   <div className="bg-white rounded-xl p-3 lg:p-8 shadow-sm border border-slate-200">
                     <h3 className="text-base lg:text-xl font-semibold text-slate-900 mb-2 lg:mb-4 flex items-center">
                       <User className="w-4 h-4 lg:w-6 lg:h-6 mr-2 lg:mr-3 text-blue-500" />
-                      Características Físicas
+                      Physical Characteristics
                     </h3>
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
                       <div className="text-center p-2 lg:p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200">
@@ -255,7 +271,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                           {talent.details.heightCm}cm
                         </div>
                         <div className="text-xs lg:text-sm font-medium text-slate-700 mt-1">
-                          Altura
+                          Height
                         </div>
                       </div>
                       <div className="text-center p-2 lg:p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-lg border border-green-200">
@@ -264,7 +280,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                           {talent.details.weightKg}kg
                         </div>
                         <div className="text-xs lg:text-sm font-medium text-slate-700 mt-1">
-                          Peso
+                          Weight
                         </div>
                       </div>
                       <div className="text-center p-2 lg:p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg border border-purple-200">
@@ -273,7 +289,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                           {talent.details.eyeColor}
                         </div>
                         <div className="text-xs lg:text-sm font-medium text-slate-700 mt-1">
-                          Olhos
+                          Eyes
                         </div>
                       </div>
                       <div className="text-center p-2 lg:p-4 bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg border border-orange-200">
@@ -282,7 +298,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                           {talent.details.hairColor}
                         </div>
                         <div className="text-xs lg:text-sm font-medium text-slate-700 mt-1">
-                          Cabelo
+                          Hair
                         </div>
                       </div>
                     </div>
@@ -292,7 +308,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                   <div className="bg-white rounded-xl p-3 lg:p-8 shadow-sm border border-slate-200">
                     <h3 className="text-base lg:text-xl font-semibold text-slate-900 mb-2 lg:mb-4 flex items-center">
                       <Star className="w-4 h-4 lg:w-6 lg:h-6 mr-2 lg:mr-3 text-blue-500" />
-                      Biografia
+                      Biography
                     </h3>
                     <p className="text-slate-800 leading-relaxed text-sm sm:text-base">
                       {talent.details.bio}
@@ -303,7 +319,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                   <div className="bg-white rounded-xl p-3 lg:p-8 shadow-sm border border-slate-200">
                     <h3 className="text-base lg:text-xl font-semibold text-slate-900 mb-2 lg:mb-4 flex items-center">
                       <MapPin className="w-4 h-4 lg:w-6 lg:h-6 mr-2 lg:mr-3 text-blue-500" />
-                      Localização
+                      Location
                     </h3>
                     <div className="flex items-center gap-3 p-2 lg:p-4 bg-slate-50 rounded-lg border border-slate-200">
                       <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-slate-600" />
@@ -318,7 +334,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                   <div className="bg-white rounded-xl p-3 lg:p-8 shadow-sm border border-slate-200">
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 gap-2 sm:gap-0">
                       <h3 className="text-base sm:text-lg font-semibold text-slate-900">
-                        Galeria de Fotos
+                        Photo Gallery
                       </h3>
                       <Button
                         variant="outline"
@@ -326,8 +342,8 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                         className="px-3 sm:px-4 py-2 text-xs sm:text-sm"
                       >
                         <Download className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-                        <span className="hidden lg:inline">Baixar Todas</span>
-                        <span className="lg:hidden">Baixar</span>
+                        <span className="hidden lg:inline">Download All</span>
+                        <span className="lg:hidden">Download</span>
                       </Button>
                     </div>
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
@@ -342,10 +358,16 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                                 <div className="w-6 h-6 sm:w-8 sm:h-8 bg-slate-300 rounded-full animate-pulse"></div>
                               </div>
                             )}
-                          {!imageErrorStates[`photo-${index}`] ? (
+                          {imageErrorStates[`photo-${index}`] ? (
+                            <div className="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center rounded-lg">
+                              <div className="text-lg sm:text-2xl font-bold text-slate-500">
+                                {talent.name.charAt(0)}
+                              </div>
+                            </div>
+                          ) : (
                             <Image
                               src={photo}
-                              alt={`${talent.name} - Foto ${index + 1}`}
+                              alt={`${talent.name} - Photo ${index + 1}`}
                               fill
                               className={`object-cover rounded-lg transition-all duration-500 group-hover:scale-105 ${
                                 imageLoadedStates[`photo-${index}`]
@@ -357,12 +379,6 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                               onLoad={() => handleImageLoad(`photo-${index}`)}
                               onError={() => handleImageError(`photo-${index}`)}
                             />
-                          ) : (
-                            <div className="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center rounded-lg">
-                              <div className="text-lg sm:text-2xl font-bold text-slate-500">
-                                {talent.name.charAt(0)}
-                              </div>
-                            </div>
                           )}
                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100">
                             <Button
@@ -382,7 +398,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                 <TabsContent value="videos" className="space-y-4">
                   <div className="bg-white rounded-xl p-4 shadow-sm border border-slate-200">
                     <h3 className="text-lg font-semibold text-slate-900 mb-3">
-                      Vídeos de Demonstração
+                      Demonstration Videos
                     </h3>
                     <div className="space-y-6">
                       {talent.videos.map((video, index) => (
@@ -411,7 +427,7 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
                 <TabsContent value="skills" className="space-y-4">
                   <div className="bg-white rounded-xl p-4 shadow-sm border border-slate-200">
                     <h3 className="text-lg font-semibold text-slate-900 mb-3">
-                      Especialidades e Habilidades
+                      Specialties and Skills
                     </h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                       {talent.skills.map((skill, index) => (

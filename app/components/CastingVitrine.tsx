@@ -26,6 +26,10 @@ import { LayoutGrid } from "lucide-react";
 // Lazy load TalentDetailSheet for better performance
 const TalentDetailSheet = lazy(() => import("./TalentDetailSheet"));
 
+/**
+ * Main casting showcase component
+ * Features talent filtering, pagination, responsive grid layout, and detailed talent views
+ */
 export default function CastingVitrine() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGender, setSelectedGender] = useState("all");
@@ -199,11 +203,11 @@ export default function CastingVitrine() {
               </div>
               <div>
                 <p className="text-base sm:text-lg font-semibold text-slate-900">
-                  {filteredTalents.length} talentos encontrados
+                  {filteredTalents.length} talents found
                 </p>
                 {totalPages > 1 && (
                   <p className="text-xs sm:text-sm text-slate-500">
-                    Página {currentPage} de {totalPages}
+                    Page {currentPage} of {totalPages}
                   </p>
                 )}
               </div>
@@ -279,16 +283,16 @@ export default function CastingVitrine() {
                         </svg>
                       </div>
                       <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
-                        Nenhum talento encontrado
+                        No talents found
                       </h3>
                       <p className="text-sm sm:text-base text-slate-500 mb-4 sm:mb-6 px-4">
-                        Tente ajustar os filtros para encontrar mais talentos.
+                        Try adjusting the filters to find more talents.
                       </p>
                       <button
                         onClick={handleClearFilters}
                         className="px-4 sm:px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 hover-scale transition-all duration-200 font-medium text-sm sm:text-base"
                       >
-                        Limpar filtros
+                        Clear filters
                       </button>
                     </div>
                   )}
@@ -310,7 +314,7 @@ export default function CastingVitrine() {
               <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
                 <div className="bg-white rounded-lg p-6 animate-pulse">
                   <div className="w-8 h-8 bg-slate-200 rounded-full mx-auto mb-4"></div>
-                  <div className="text-slate-600">Carregando detalhes...</div>
+                  <div className="text-slate-600">Loading details...</div>
                 </div>
               </div>
             }

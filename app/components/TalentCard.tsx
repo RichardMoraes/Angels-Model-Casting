@@ -6,12 +6,22 @@ import { Card, CardContent } from "../../components/ui/card";
 import Image from "next/image";
 import { MapPin, Calendar, Ruler, Weight, Eye, User } from "lucide-react";
 
+/**
+ * Props for the TalentCard component
+ */
 interface TalentCardProps {
+  /** Talent profile data */
   readonly talent: TalentProfile;
+  /** Callback function when card is clicked */
   readonly onClick: (talent: TalentProfile) => void;
+  /** Whether this card should be prioritized for loading */
   readonly isPriority?: boolean;
 }
 
+/**
+ * Individual talent card component displaying talent information
+ * Features hover effects, image fallbacks, and responsive design
+ */
 const TalentCard = memo(function TalentCard({
   talent,
   onClick,
@@ -20,11 +30,14 @@ const TalentCard = memo(function TalentCard({
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  // Fallback para imagem local se a externa falhar
+  // Fallback to placeholder image if external image fails
   const imageSrc = imageError 
     ? `/api/placeholder/400/288?text=${encodeURIComponent(talent.name.charAt(0))}`
     : talent.mainPhotoUrl;
 
+  /**
+   * Handles image loading errors by switching to placeholder
+   */
   const handleImageError = () => {
     setImageError(true);
     setImageLoaded(true);
@@ -61,7 +74,7 @@ const TalentCard = memo(function TalentCard({
         {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-        {/* Quick info overlay - Mostra informações únicas no hover */}
+        {/* Quick info overlay - Shows unique information on hover */}
         <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
           <div className="bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-lg">
             <div className="flex items-center justify-between text-sm">
@@ -76,7 +89,7 @@ const TalentCard = memo(function TalentCard({
             </div>
             <div className="mt-2 text-center">
               <span className="text-xs font-semibold text-slate-700 bg-slate-100 px-2 py-1 rounded-full">
-                {talent.skills.length} especialidades
+                {talent.skills.length} specialties
               </span>
             </div>
           </div>
@@ -144,9 +157,9 @@ const TalentCard = memo(function TalentCard({
             </div>
           </div>
 
-          {/* Skills - Layout consistente */}
+          {/* Skills - Consistent layout */}
           <div className="space-y-3 mt-auto">
-            <h4 className="text-sm font-semibold text-slate-700">Especialidades</h4>
+            <h4 className="text-sm font-semibold text-slate-700">Specialties</h4>
             <div className="grid grid-cols-2 gap-2">
                       {talent.skills.slice(0, 3).map((skill, index) => (
                         <span

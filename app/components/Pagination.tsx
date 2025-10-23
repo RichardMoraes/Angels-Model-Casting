@@ -4,12 +4,22 @@ import { memo } from "react";
 import { Button } from "../../components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+/**
+ * Props for the Pagination component
+ */
 interface PaginationProps {
+  /** Current active page number */
   readonly currentPage: number;
+  /** Total number of pages */
   readonly totalPages: number;
+  /** Callback function when page changes */
   readonly onPageChange: (page: number) => void;
 }
 
+/**
+ * Pagination component with smart page number display
+ * Features ellipsis for large page counts and responsive design
+ */
 const Pagination = memo(function Pagination({
   currentPage,
   totalPages,
@@ -17,6 +27,10 @@ const Pagination = memo(function Pagination({
 }: PaginationProps) {
   if (totalPages <= 1) return null;
 
+  /**
+   * Calculates visible page numbers with ellipsis
+   * Shows current page ± delta pages, with ellipsis for gaps
+   */
   const getVisiblePages = () => {
     const delta = 2;
     const range = [];
@@ -57,8 +71,8 @@ const Pagination = memo(function Pagination({
         className="flex items-center gap-1 sm:gap-2 h-9 sm:h-10 px-3 sm:px-4 rounded-xl border-slate-200 hover:border-blue-500 hover:bg-blue-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-xs sm:text-sm hover:scale-105"
       >
         <ChevronLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-        <span className="hidden sm:inline">Anterior</span>
-        <span className="sm:hidden">Ant</span>
+        <span className="hidden sm:inline">Previous</span>
+        <span className="sm:hidden">Prev</span>
       </Button>
 
       <div className="flex items-center space-x-1 sm:space-x-2">
@@ -103,8 +117,8 @@ const Pagination = memo(function Pagination({
         disabled={currentPage === totalPages}
         className="flex items-center gap-1 sm:gap-2 h-9 sm:h-10 px-3 sm:px-4 rounded-xl border-slate-200 hover:border-blue-500 hover:bg-blue-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-xs sm:text-sm hover:scale-105"
       >
-        <span className="hidden sm:inline">Próximo</span>
-        <span className="sm:hidden">Próx</span>
+        <span className="hidden sm:inline">Next</span>
+        <span className="sm:hidden">Next</span>
         <ChevronRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
       </Button>
     </div>
