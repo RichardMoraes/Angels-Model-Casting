@@ -587,3 +587,41 @@ body {
   box-shadow: var(--shadow-lg);
   border-color: hsl(var(--border) / 0.8);
 }
+
+/* Clean Sidebar Animations - Correct Implementation */
+[data-slot="sheet-content"] {
+  transform: translateX(100%) !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[data-slot="sheet-content"][data-state="open"] {
+  transform: translateX(0) !important;
+}
+
+[data-slot="sheet-overlay"] {
+  opacity: 0 !important;
+  transition: opacity 0.3s ease-in-out !important;
+}
+
+[data-slot="sheet-overlay"][data-state="open"] {
+  opacity: 1 !important;
+}
+
+/* Alternative approach - More specific selectors */
+[data-radix-dialog-content][data-slot="sheet-content"] {
+  transform: translateX(100%) !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[data-radix-dialog-content][data-slot="sheet-content"][data-state="open"] {
+  transform: translateX(0) !important;
+}
+
+[data-radix-dialog-overlay][data-slot="sheet-overlay"] {
+  opacity: 0 !important;
+  transition: opacity 0.3s ease-in-out !important;
+}
+
+[data-radix-dialog-overlay][data-slot="sheet-overlay"][data-state="open"] {
+  opacity: 1 !important;
+}
