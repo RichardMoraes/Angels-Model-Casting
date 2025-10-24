@@ -3,10 +3,6 @@
 import { useState, memo } from "react";
 import { TalentProfile } from "../types/TalentProfile";
 import {
-  SheetDescription,
-  SheetTitle,
-} from "../../components/ui/sheet";
-import {
   Tabs,
   TabsContent,
   TabsList,
@@ -164,12 +160,12 @@ const TalentDetailSheet = memo(function TalentDetailSheet({
 
                   {/* Profile Info */}
                   <div className="flex-1 min-w-0 text-center lg:text-left w-full lg:w-auto">
-                    <SheetTitle className="text-2xl lg:text-4xl font-bold mb-2 text-white drop-shadow-2xl shadow-black/50">
+                    <h1 className="text-2xl lg:text-4xl font-bold mb-2 text-white drop-shadow-2xl shadow-black/50">
                       {talent.name}
-                    </SheetTitle>
-                    <SheetDescription className="text-slate-200 text-base lg:text-xl mb-4">
+                    </h1>
+                    <p className="text-slate-200 text-base lg:text-xl mb-4">
                       {talent.age} years • {talent.city}, {talent.state}
-                    </SheetDescription>
+                    </p>
                     <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 lg:gap-4 mb-4">
                       <span className="px-3 py-1.5 bg-white/20 text-white text-xs lg:text-sm font-medium rounded-full border border-white/30">
                         {(() => {
