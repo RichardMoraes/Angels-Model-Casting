@@ -75,10 +75,10 @@ const TalentCard = memo(function TalentCard({
   };
 
   return (
-            <Card
-              className="group cursor-pointer card-interactive hover-lift-enhanced overflow-hidden border border-gray-200/50 bg-white hover:border-primary/30 shadow-professional relative z-10 h-full flex flex-col animate-fade-in-scale"
-              onClick={() => onClick(talent)}
-            >
+    <Card
+      className="group cursor-pointer card-interactive hover-lift-enhanced overflow-hidden border border-gray-200/50 bg-white hover:border-primary/30 shadow-professional relative z-10 h-full flex flex-col animate-fade-in-scale"
+      onClick={() => onClick(talent)}
+    >
       {/* Image Section */}
       <div className="relative w-full h-72 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
         {/* Loading placeholder */}
@@ -101,7 +101,7 @@ const TalentCard = memo(function TalentCard({
           onLoad={() => setImageLoaded(true)}
           onError={handleImageError}
         />
-        
+
         {/* Photo Navigation Arrows */}
         {talent.photos.length > 1 && (
           <>
@@ -131,7 +131,7 @@ const TalentCard = memo(function TalentCard({
             {currentPhotoIndex + 1}/{talent.photos.length}
           </div>
         )}
-        
+
         {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -179,7 +179,7 @@ const TalentCard = memo(function TalentCard({
                   </span>
                 </div>
               </div>
-              
+
               {/* Status Indicators */}
               <div className="ml-4 flex flex-col items-end gap-2">
                 <StatusIndicator
@@ -192,9 +192,12 @@ const TalentCard = memo(function TalentCard({
                 <div className="px-3 py-1.5 bg-purple-50 text-purple-700 text-xs font-semibold rounded-full border border-purple-200/50 group-hover:bg-purple-100 transition-colors duration-300 hover-scale-enhanced animate-bounce-in">
                   {(() => {
                     switch (talent.gender) {
-                      case "Female": return "Fem";
-                      case "Male": return "Masc";
-                      default: return "NB";
+                      case "Female":
+                        return "Fem";
+                      case "Male":
+                        return "Masc";
+                      default:
+                        return "NB";
                     }
                   })()}
                 </div>
@@ -229,37 +232,47 @@ const TalentCard = memo(function TalentCard({
           <div className="grid grid-cols-2 gap-4 py-4 px-4 bg-slate-50 rounded-lg">
             <div className="flex items-center gap-3 text-sm">
               <Ruler className="w-4 h-4 text-slate-500" />
-              <span className="text-slate-700 font-medium">{talent.details.heightCm}cm</span>
+              <span className="text-slate-700 font-medium">
+                {talent.details.heightCm}cm
+              </span>
             </div>
             <div className="flex items-center gap-3 text-sm">
               <Weight className="w-4 h-4 text-slate-500" />
-              <span className="text-slate-700 font-medium">{talent.details.weightKg}kg</span>
+              <span className="text-slate-700 font-medium">
+                {talent.details.weightKg}kg
+              </span>
             </div>
             <div className="flex items-center gap-3 text-sm">
               <Eye className="w-4 h-4 text-slate-500" />
-              <span className="text-slate-700 font-medium">{talent.details.eyeColor}</span>
+              <span className="text-slate-700 font-medium">
+                {talent.details.eyeColor}
+              </span>
             </div>
             <div className="flex items-center gap-3 text-sm">
               <User className="w-4 h-4 text-slate-500" />
-              <span className="text-slate-700 font-medium">{talent.details.hairColor}</span>
+              <span className="text-slate-700 font-medium">
+                {talent.details.hairColor}
+              </span>
             </div>
           </div>
 
           {/* Skills - Consistent layout */}
           <div className="space-y-3 mt-auto">
-            <h4 className="text-sm font-semibold text-slate-700">Specialties</h4>
+            <h4 className="text-sm font-semibold text-slate-700">
+              Specialties
+            </h4>
             <div className="grid grid-cols-2 gap-2">
-                      {talent.skills.slice(0, 3).map((skill, index) => (
-                        <span
-                          key={skill}
-                          className="px-3 py-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white text-xs font-semibold rounded-full shadow-md group-hover:shadow-lg hover-scale transition-all duration-300 text-center truncate"
-                          style={{
-                            animationDelay: `${index * 100}ms`,
-                          }}
-                        >
-                          {skill}
-                        </span>
-                      ))}
+              {talent.skills.slice(0, 3).map((skill, index) => (
+                <span
+                  key={skill}
+                  className="px-3 py-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white text-xs font-semibold rounded-full shadow-md group-hover:shadow-lg hover-scale transition-all duration-300 text-center truncate"
+                  style={{
+                    animationDelay: `${index * 100}ms`,
+                  }}
+                >
+                  {skill}
+                </span>
+              ))}
               {talent.skills.length > 3 && (
                 <span className="px-3 py-2 bg-slate-200 text-slate-600 text-xs font-semibold rounded-full group-hover:bg-slate-300 transition-colors duration-300 text-center">
                   +{talent.skills.length - 3}
