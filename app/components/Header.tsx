@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Bell, Settings, User, Search, ChevronUp, Menu } from "lucide-react";
+import { HEADER_HEIGHT } from "../constants/layout";
 
 /**
  * Navigation item configuration for CMS integration
@@ -74,6 +75,11 @@ export default function Header({ totalTalents, filteredTalents }: HeaderProps) {
 
   return (
     <>
+      {/* 
+        IMPORTANTE: As alturas h-[72px] e lg:h-[86px] devem estar sincronizadas com
+        HEADER_HEIGHT em app/constants/layout.ts para que outros componentes
+        (como AdvancedFilters) calculem corretamente o posicionamento sticky.
+      */}
       <header className="h-[72px] lg:h-[86px] bg-white/95 backdrop-blur-xl border-b border-gray-200/50 px-4 lg:px-8 flex items-center justify-between sticky top-0 z-40 shadow-sm">
         {/* Left Section: Logo & Talent Count */}
         <div className="flex items-center gap-3 lg:gap-6">
@@ -226,7 +232,7 @@ export default function Header({ totalTalents, filteredTalents }: HeaderProps) {
           className="lg:hidden fixed inset-0 bg-black/20 z-20 cursor-default"
           onClick={() => setIsMobileMenuOpen(false)}
           onKeyDown={(e) => e.key === "Escape" && setIsMobileMenuOpen(false)}
-          style={{ top: "72px" }}
+          style={{ top: `${HEADER_HEIGHT.mobile}px` }}
           aria-label="Fechar menu"
         />
       )}

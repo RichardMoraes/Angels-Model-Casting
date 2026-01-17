@@ -95,17 +95,17 @@ type UserPreference = FilterDisplayMode | null;
  */
 type ExpandedViewMode = 'default' | 'manual';
 
-// Breakpoints - usar LARGURA para mobile (padrão da indústria)
-const MOBILE_BREAKPOINT = 768; // md breakpoint do Tailwind
-const EXPAND_THRESHOLD = 50;   // Expande quando scroll < 50px
-const COLLAPSE_THRESHOLD = 250; // Colapsa quando scroll > 250px
-const TRANSITION_LOCK_MS = 300; // Ignora scroll por 300ms após transição
+// Importa constantes de layout compartilhadas (sincronizadas com Header.tsx)
+import { 
+  MOBILE_BREAKPOINT, 
+  HEADER_HEIGHT, 
+  SCROLL_THRESHOLDS, 
+  TRANSITION_LOCK_MS 
+} from "../constants/layout";
 
-// Header heights por breakpoint (deve corresponder ao Header.tsx)
-const HEADER_HEIGHT = {
-  mobile: 72,  // h-[72px]
-  desktop: 86, // lg:h-[86px]
-};
+// Aliases locais para facilitar leitura
+const EXPAND_THRESHOLD = SCROLL_THRESHOLDS.expand;
+const COLLAPSE_THRESHOLD = SCROLL_THRESHOLDS.collapse;
 
 // Hook customizado que encapsula toda a lógica de estado dos filtros
 function useFilterState() {
@@ -420,27 +420,27 @@ const AdvancedFilters = memo(function AdvancedFilters({
       {/* Line 1 - Search + Age + Gender + Button */}
       <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto_auto_auto] gap-3 items-center">
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
-          <input
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none z-10" />
+          <Input
             type="text"
             placeholder="Buscar por nome..."
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full h-11 md:h-12 px-4 pl-11 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-figma-primary/30 focus:border-figma-primary bg-white/50 text-sm md:text-base"
+            className="w-full h-11 md:h-12 px-4 pl-11 border border-gray-200 rounded-xl focus:ring-2 focus:ring-figma-primary/30 focus:border-figma-primary bg-white/50 text-sm md:text-base"
           />
         </div>
         
         <div className="grid grid-cols-2 gap-2 md:contents">
-          <input
+          <Input
             type="number"
             placeholder="Min"
-            className="w-full md:w-20 lg:w-24 h-11 md:h-12 px-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-figma-primary/30 focus:border-figma-primary bg-white/50 text-sm text-center"
+            className="w-full md:w-20 lg:w-24 h-11 md:h-12 px-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-figma-primary/30 focus:border-figma-primary bg-white/50 text-sm text-center"
           />
           
-          <input
+          <Input
             type="number"
             placeholder="Max"
-            className="w-full md:w-20 lg:w-24 h-11 md:h-12 px-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-figma-primary/30 focus:border-figma-primary bg-white/50 text-sm text-center"
+            className="w-full md:w-20 lg:w-24 h-11 md:h-12 px-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-figma-primary/30 focus:border-figma-primary bg-white/50 text-sm text-center"
           />
         </div>
         
