@@ -6,7 +6,13 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "cms:up": "cd backend && docker compose up -d",
+    "cms:down": "cd backend && docker compose down",
+    "cms:logs": "cd backend && docker compose logs -f strapi",
+    "cms:build": "cd backend && docker compose build --no-cache",
+    "cms:shell": "cd backend && docker compose exec strapi sh",
+    "cms:restart": "cd backend && docker compose restart strapi"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
@@ -15,7 +21,7 @@
     "@radix-ui/react-tabs": "^1.1.13",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.23.24",
+    "framer-motion": "^12.26.2",
     "lucide-react": "^0.546.0",
     "next": "15.5.6",
     "react": "19.1.0",

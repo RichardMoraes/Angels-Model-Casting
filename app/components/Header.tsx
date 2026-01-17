@@ -45,7 +45,7 @@ const defaultUser = {
  * Default brand data - can be replaced with CMS data
  */
 const defaultBrand = {
-  title: "Vogue Talent",
+  title: "Angels Model Casting",
   subtitle: "Management",
 };
 

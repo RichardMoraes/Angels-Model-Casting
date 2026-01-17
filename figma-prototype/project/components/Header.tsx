@@ -11,7 +11,7 @@ export function Header() {
           V
         </div>
         <div>
-          <span className="text-[#4B1B6F] block">Vogue Talent</span>
+          <span className="text-[#4B1B6F] block">Angels Model Casting</span>
           <span className="text-gray-500 text-xs">Management</span>
         </div>
       </div>
