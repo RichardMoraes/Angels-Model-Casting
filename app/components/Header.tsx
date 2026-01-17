@@ -1,7 +1,16 @@
 "use client";
 
-import { useState } from "react";
-import { Bell, Settings, User, ChevronDown, Search } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Bell, Settings, User, Search, ChevronUp, Menu } from "lucide-react";
+
+/**
+ * Navigation item configuration for CMS integration
+ */
+interface NavItem {
+  id: string;
+  label: string;
+  href: string;
+}
 
 /**
  * Props for the Header component
@@ -14,139 +23,224 @@ interface HeaderProps {
 }
 
 /**
+ * Default navigation items - can be replaced with CMS data
+ */
+const defaultNavItems: NavItem[] = [
+  { id: "talentos", label: "Talentos", href: "#" },
+  { id: "castings", label: "Castings", href: "#" },
+  { id: "selecoes", label: "Seleções", href: "#" },
+  { id: "agendamentos", label: "Agendamentos", href: "#" },
+  { id: "diretores", label: "Diretores", href: "#" },
+];
+
+/**
+ * Default user data - can be replaced with CMS/Auth data
+ */
+const defaultUser = {
+  name: "Ricardo",
+  role: "Diretor de Casting",
+};
+
+/**
+ * Default brand data - can be replaced with CMS data
+ */
+const defaultBrand = {
+  title: "Vogue Talent",
+  subtitle: "Management",
+};
+
+/**
  * Main application header component
- * Features navigation, user menu, notifications, and system status
+ * Features navigation, user menu, notifications
  */
 export default function Header({ totalTalents, filteredTalents }: HeaderProps) {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const [isStatsMenuOpen, setIsStatsMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [notificationCount] = useState(3);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 400);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <header className="bg-corporate-gradient shadow-xl border-b border-white/20 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <>
+      <header className="h-[72px] lg:h-[86px] bg-white/95 backdrop-blur-xl border-b border-gray-200/50 px-4 lg:px-8 flex items-center justify-between sticky top-0 z-40 shadow-sm">
+        {/* Left Section: Logo & Talent Count */}
+        <div className="flex items-center gap-3 lg:gap-6">
           {/* Logo */}
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/30 shadow-professional-sm hover-scale transition-professional">
-                <span className="text-white font-bold text-lg">V</span>
-              </div>
-              <h1 className="text-h3 font-bold text-white tracking-tight">
-                Talent Showcase
-              </h1>
+          <div className="flex items-center gap-2 lg:gap-3">
+            <div className="w-9 h-9 lg:w-11 lg:h-11 bg-gradient-to-br from-figma-primary to-figma-light rounded-xl flex items-center justify-center text-white shadow-lg font-bold">
+              V
+            </div>
+            <div className="min-w-0">
+              <span className="text-figma-primary font-semibold block text-sm lg:text-base whitespace-nowrap">
+                {defaultBrand.title}
+              </span>
+              <span className="text-gray-500 text-xs hidden lg:block whitespace-nowrap">
+                {defaultBrand.subtitle}
+              </span>
             </div>
           </div>
 
-          {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
-            <div className="relative">
-              <button
-                onClick={() => setIsStatsMenuOpen(!isStatsMenuOpen)}
-                className="flex items-center space-x-1 text-white hover:text-primary-200 transition-professional hover-scale"
-              >
-                <span>Statistics</span>
-                <ChevronDown className="w-4 h-4" />
-              </button>
-              {isStatsMenuOpen && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-professional border border-gray-200 py-2 z-50 animate-fade-in">
-                  <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-professional">
-                    Overview
-                  </button>
-                  <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-professional">
-                    Active Talents
-                  </button>
-                  <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-professional">
-                    Reports
-                  </button>
-                </div>
-              )}
-            </div>
+          {/* Talent Counter */}
+          <div className="flex items-center gap-1 lg:gap-2 px-2 lg:px-3 py-1 lg:py-1.5 bg-figma-primary/5 rounded-lg border border-figma-primary/10">
+            <span className="text-figma-primary font-semibold text-xs lg:text-sm">
+              {filteredTalents.toLocaleString()}
+            </span>
+            <span className="text-gray-500 text-xs hidden md:inline">
+              / {totalTalents.toLocaleString()} talentos
+            </span>
+          </div>
+        </div>
 
-            <button className="text-white hover:text-primary-200 transition-professional hover-scale">
-              Jobs
+        {/* Center: Navigation - Desktop */}
+        <nav className="hidden lg:flex items-center gap-4 xl:gap-6">
+          {defaultNavItems.map((item) => (
+            <a
+              key={item.id}
+              href={item.href}
+              className="text-gray-700 hover:text-figma-primary transition-colors duration-200 relative group whitespace-nowrap"
+            >
+              {item.label}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-figma-primary group-hover:w-full transition-all duration-300" />
+            </a>
+          ))}
+        </nav>
+
+        {/* Right Section */}
+        <div className="flex items-center gap-2 lg:gap-3">
+          {/* Search - Desktop only */}
+          <button
+            className="hidden lg:flex p-2.5 hover:bg-gray-100 rounded-xl transition-all duration-300"
+            title="Buscar"
+          >
+            <Search className="w-5 h-5 text-gray-700" />
+          </button>
+
+          {/* Notifications */}
+          <button
+            className="p-2 hover:bg-gray-100 rounded-xl transition-all duration-300 relative"
+            title="Notificações"
+          >
+            <Bell className="w-5 h-5 text-gray-700" />
+            {notificationCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                {notificationCount}
+              </span>
+            )}
+          </button>
+
+          {/* User Profile */}
+          <button
+            onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+            className="flex items-center gap-2 lg:gap-3 px-2 lg:px-3 py-1.5 lg:py-2 hover:bg-gray-100 rounded-xl transition-all duration-300 relative"
+          >
+            <div className="w-8 h-8 lg:w-9 lg:h-9 rounded-full bg-gradient-to-br from-figma-primary to-figma-light flex items-center justify-center text-white">
+              <User className="w-4 h-4" />
+            </div>
+            <div className="hidden xl:flex flex-col text-left min-w-0">
+              <span className="text-figma-primary font-medium text-sm whitespace-nowrap">
+                {defaultUser.name}
+              </span>
+              <span className="text-xs text-gray-500 whitespace-nowrap">
+                {defaultUser.role}
+              </span>
+            </div>
+          </button>
+
+          {/* User Dropdown Menu */}
+          {isUserMenuOpen && (
+            <div className="absolute top-full right-4 lg:right-8 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50 animate-fade-in">
+              <button className="block w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-200">
+                Meu Perfil
+              </button>
+              <button className="block w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-200">
+                Configurações
+              </button>
+              <hr className="my-2 border-gray-200" />
+              <button className="block w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors duration-200">
+                Sair
+              </button>
+            </div>
+          )}
+
+          {/* Settings - Desktop only */}
+          <button
+            className="hidden lg:flex p-2.5 hover:bg-gray-100 rounded-xl transition-all duration-300"
+            title="Configurações"
+          >
+            <Settings className="w-5 h-5 text-gray-700" />
+          </button>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            className="lg:hidden p-2 hover:bg-gray-100 rounded-xl transition-all duration-300"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            title="Menu"
+          >
+            <Menu className="w-5 h-5 text-gray-700" />
+          </button>
+        </div>
+      </header>
+
+      {/* Mobile Menu Dropdown */}
+      {isMobileMenuOpen && (
+        <div className="lg:hidden bg-white border-b border-gray-200 shadow-lg z-30">
+          <nav className="px-4 py-3 space-y-1">
+            {defaultNavItems.map((item) => (
+              <a
+                key={item.id}
+                href={item.href}
+                className="block px-4 py-3 text-gray-700 hover:bg-figma-primary/5 hover:text-figma-primary rounded-xl transition-colors duration-200"
+              >
+                {item.label}
+              </a>
+            ))}
+            <hr className="my-2 border-gray-200" />
+            <button className="flex items-center gap-3 w-full px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl transition-colors duration-200">
+              <Search className="w-5 h-5" />
+              Buscar
             </button>
-            <button className="text-white hover:text-primary-200 transition-professional hover-scale">
-              Selections
-            </button>
-            <button className="text-white hover:text-primary-200 transition-professional hover-scale">
-              Registration
-            </button>
-            <button className="text-white hover:text-primary-200 transition-professional hover-scale">
-              Directors
+            <button className="flex items-center gap-3 w-full px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl transition-colors duration-200">
+              <Settings className="w-5 h-5" />
+              Configurações
             </button>
           </nav>
-
-          {/* Right Side Controls */}
-          <div className="flex items-center space-x-4">
-            {/* Search Icon */}
-            <button className="p-2 text-white hover:text-primary-200 transition-professional hover-scale">
-              <Search className="w-5 h-5" />
-            </button>
-
-            {/* Notifications */}
-            <button className="relative p-2 text-white hover:text-primary-200 hover-scale transition-professional">
-              <Bell className="w-5 h-5" />
-              <span className="absolute -top-1 -right-1 w-3 h-3 bg-destructive rounded-full text-xs flex items-center justify-center text-white animate-pulse-glow">
-                3
-              </span>
-            </button>
-
-            {/* User Menu */}
-            <div className="relative">
-              <button
-                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                className="flex items-center space-x-2 text-white hover:text-primary-200 hover-scale transition-professional"
-              >
-                <div className="w-8 h-8 bg-corporate-gradient-secondary rounded-full flex items-center justify-center hover-glow transition-professional">
-                  <User className="w-4 h-4 text-white" />
-                </div>
-                <span className="hidden sm:block font-medium">RICH</span>
-                <ChevronDown className="w-4 h-4" />
-              </button>
-
-              {isUserMenuOpen && (
-                <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-professional border border-gray-200 py-2 z-50 animate-fade-in">
-                  <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-professional">
-                    My Profile
-                  </button>
-                  <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-professional">
-                    Settings
-                  </button>
-                  <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-professional">
-                    Product...
-                  </button>
-                  <hr className="my-2" />
-                  <button className="block w-full text-left px-4 py-2 text-sm text-destructive hover:bg-red-50 transition-professional">
-                    Sign Out
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Settings */}
-            <button className="p-2 text-white hover:text-primary-200 transition-professional hover-scale">
-              <Settings className="w-5 h-5" />
-            </button>
-          </div>
         </div>
+      )}
 
-        {/* Status Bar */}
-        <div className="flex items-center justify-between py-2 border-t border-white/20">
-          <div className="flex items-center space-x-4 text-sm text-white/80">
-            <span className="font-medium">
-              {filteredTalents.toLocaleString()} talents found
-            </span>
-            <span className="text-white/60">
-              of {totalTalents.toLocaleString()} total
-            </span>
-          </div>
+      {/* Overlay for mobile menu */}
+      {isMobileMenuOpen && (
+        <button
+          type="button"
+          className="lg:hidden fixed inset-0 bg-black/20 z-20 cursor-default"
+          onClick={() => setIsMobileMenuOpen(false)}
+          onKeyDown={(e) => e.key === "Escape" && setIsMobileMenuOpen(false)}
+          style={{ top: "72px" }}
+          aria-label="Fechar menu"
+        />
+      )}
 
-          <div className="flex items-center space-x-2 text-sm text-white/80">
-            <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
-            <span>System Online</span>
-          </div>
-        </div>
-      </div>
-    </header>
+      {/* Back to Top Button */}
+      {showBackToTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 w-12 h-12 bg-gradient-to-br from-figma-primary to-figma-light text-white rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center z-50"
+          title="Voltar ao topo"
+        >
+          <ChevronUp className="w-6 h-6" />
+        </button>
+      )}
+    </>
   );
 }

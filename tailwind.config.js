@@ -89,6 +89,11 @@ module.exports = {
           900: "#2D1B69", // Primary corporate color
           950: "#1e0b4b",
         },
+        // Figma Design System Colors
+        figma: {
+          primary: "#4B1B6F",
+          light: "#7B3FF2",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -106,6 +111,10 @@ module.exports = {
         professional: "var(--shadow-lg)",
         "professional-lg": "var(--shadow-xl)",
         "professional-sm": "var(--shadow-md)",
+        // Figma Design System Shadows
+        figma: "0 25px 50px -12px rgba(75, 27, 111, 0.25)",
+        "figma-glow": "0 0 30px rgba(123, 63, 242, 0.3)",
+        "figma-sm": "0 4px 6px -1px rgba(75, 27, 111, 0.1)",
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],

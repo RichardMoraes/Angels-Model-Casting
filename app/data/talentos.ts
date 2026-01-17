@@ -17,6 +17,9 @@ export const talentos: TalentProfile[] = [
       hairColor: "Castanho",
       eyeColor: "Verde",
       bio: "Atriz experiente com formação em teatro e experiência em comerciais e novelas.",
+      bust: 86,
+      waist: 62,
+      hip: 92,
     },
     skills: ["Atuação", "Dança", "Canto", "Modelagem"],
     photos: [
@@ -30,13 +33,19 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
-    // Phase 6 - Visual Refinements
     rating: 4.5,
     skillTags: ["F", "E", "O"],
     status: {
       isOnline: true,
       isPremium: true,
       isAvailable: true,
+      isNew: false,
+      hasDRT: true,
+    },
+    languages: ["Português", "Inglês"],
+    stats: {
+      portfolioViews: 1250,
+      bookingRate: 85,
     },
   },
   {
@@ -55,6 +64,9 @@ export const talentos: TalentProfile[] = [
       hairColor: "Preto",
       eyeColor: "Castanho",
       bio: "Modelo masculino com experiência internacional e trabalhos em moda.",
+      bust: 102,
+      waist: 82,
+      hip: 98,
     },
     skills: ["Modelagem", "Fotografia", "Esportes", "Idiomas"],
     photos: [
@@ -68,13 +80,19 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
-    // Phase 6 - Visual Refinements
     rating: 4.2,
     skillTags: ["F", "E"],
     status: {
       isOnline: false,
       isPremium: false,
       isAvailable: true,
+      isNew: true,
+      hasDRT: false,
+    },
+    languages: ["Português", "Inglês", "Espanhol"],
+    stats: {
+      portfolioViews: 890,
+      bookingRate: 72,
     },
   },
   {
@@ -93,6 +111,9 @@ export const talentos: TalentProfile[] = [
       hairColor: "Preto",
       eyeColor: "Castanho",
       bio: "Atriz e apresentadora com destaque em programas de TV e teatro.",
+      bust: 88,
+      waist: 65,
+      hip: 95,
     },
     skills: ["Atuação", "Apresentação", "Dança", "Locução"],
     photos: [
@@ -106,13 +127,19 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
-    // Phase 6 - Visual Refinements
     rating: 4.8,
     skillTags: ["E", "O", "R"],
     status: {
       isOnline: true,
       isPremium: true,
       isAvailable: true,
+      isNew: false,
+      hasDRT: true,
+    },
+    languages: ["Português", "Inglês"],
+    stats: {
+      portfolioViews: 2150,
+      bookingRate: 92,
     },
   },
   {
@@ -131,6 +158,9 @@ export const talentos: TalentProfile[] = [
       hairColor: "Loiro",
       eyeColor: "Azul",
       bio: "Ator com experiência em teatro, cinema e TV, especializado em dramas.",
+      bust: 98,
+      waist: 78,
+      hip: 94,
     },
     skills: ["Atuação", "Teatro", "Cinema", "Direção"],
     photos: [
@@ -144,13 +174,19 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
-    // Phase 6 - Visual Refinements
     rating: 4.0,
     skillTags: ["F", "R"],
     status: {
       isOnline: true,
       isPremium: false,
       isAvailable: false,
+      isNew: false,
+      hasDRT: true,
+    },
+    languages: ["Português"],
+    stats: {
+      portfolioViews: 750,
+      bookingRate: 68,
     },
   },
   {
@@ -169,6 +205,9 @@ export const talentos: TalentProfile[] = [
       hairColor: "Castanho",
       eyeColor: "Verde",
       bio: "Modelo jovem com potencial para moda e comerciais, muito versátil.",
+      bust: 82,
+      waist: 60,
+      hip: 88,
     },
     skills: ["Modelagem", "Dança", "Fotografia", "Moda"],
     photos: [
@@ -182,13 +221,19 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
-    // Phase 6 - Visual Refinements
     rating: 3.8,
     skillTags: ["F", "E"],
     status: {
       isOnline: false,
       isPremium: false,
       isAvailable: true,
+      isNew: true,
+      hasDRT: false,
+    },
+    languages: ["Português"],
+    stats: {
+      portfolioViews: 420,
+      bookingRate: 55,
     },
   },
   {
@@ -207,6 +252,9 @@ export const talentos: TalentProfile[] = [
       hairColor: "Preto",
       eyeColor: "Castanho",
       bio: "Ator experiente com destaque em novelas e comerciais, muito carismático.",
+      bust: 100,
+      waist: 84,
+      hip: 96,
     },
     skills: ["Atuação", "Comédia", "Locução", "Esportes"],
     photos: [
@@ -220,13 +268,19 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
-    // Phase 6 - Visual Refinements
     rating: 4.6,
     skillTags: ["E", "R"],
     status: {
       isOnline: true,
       isPremium: true,
       isAvailable: true,
+      isNew: false,
+      hasDRT: true,
+    },
+    languages: ["Português", "Inglês"],
+    stats: {
+      portfolioViews: 1890,
+      bookingRate: 88,
     },
   },
   {
@@ -245,6 +299,9 @@ export const talentos: TalentProfile[] = [
       hairColor: "Ruivo",
       eyeColor: "Verde",
       bio: "Atriz versátil com experiência em teatro clássico e contemporâneo.",
+      bust: 84,
+      waist: 63,
+      hip: 90,
     },
     skills: ["Atuação", "Teatro", "Dança", "Canto"],
     photos: [
@@ -258,13 +315,19 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
-    // Phase 6 - Visual Refinements
     rating: 4.3,
     skillTags: ["E", "R"],
     status: {
       isOnline: false,
       isPremium: false,
       isAvailable: true,
+      isNew: false,
+      hasDRT: true,
+    },
+    languages: ["Português", "Francês"],
+    stats: {
+      portfolioViews: 980,
+      bookingRate: 75,
     },
   },
   {
@@ -283,6 +346,9 @@ export const talentos: TalentProfile[] = [
       hairColor: "Preto",
       eyeColor: "Castanho",
       bio: "Modelo e ator com experiência em moda masculina e comerciais.",
+      bust: 99,
+      waist: 80,
+      hip: 95,
     },
     skills: ["Modelagem", "Atuação", "Fotografia", "Esportes"],
     photos: [
@@ -296,13 +362,19 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
-    // Phase 6 - Visual Refinements
     rating: 4.1,
     skillTags: ["F", "E"],
     status: {
       isOnline: true,
       isPremium: false,
       isAvailable: true,
+      isNew: true,
+      hasDRT: false,
+    },
+    languages: ["Português"],
+    stats: {
+      portfolioViews: 650,
+      bookingRate: 62,
     },
   },
   {
@@ -321,6 +393,9 @@ export const talentos: TalentProfile[] = [
       hairColor: "Loiro",
       eyeColor: "Azul",
       bio: "Modelo jovem com potencial para alta costura e comerciais de beleza.",
+      bust: 83,
+      waist: 61,
+      hip: 89,
     },
     skills: ["Modelagem", "Moda", "Fotografia", "Dança"],
     photos: [
@@ -334,13 +409,19 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
-    // Phase 6 - Visual Refinements
     rating: 3.9,
     skillTags: ["F", "E"],
     status: {
       isOnline: false,
       isPremium: false,
       isAvailable: true,
+      isNew: true,
+      hasDRT: false,
+    },
+    languages: ["Português", "Inglês"],
+    stats: {
+      portfolioViews: 380,
+      bookingRate: 48,
     },
   },
   {
@@ -359,6 +440,9 @@ export const talentos: TalentProfile[] = [
       hairColor: "Preto",
       eyeColor: "Castanho",
       bio: "Ator com forte presença cênica e experiência em produções regionais.",
+      bust: 96,
+      waist: 78,
+      hip: 92,
     },
     skills: ["Atuação", "Cultura Indígena", "Teatro", "Música"],
     photos: [
@@ -372,13 +456,19 @@ export const talentos: TalentProfile[] = [
         url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       },
     ],
-    // Phase 6 - Visual Refinements
     rating: 4.4,
     skillTags: ["E", "R"],
     status: {
       isOnline: true,
       isPremium: true,
       isAvailable: true,
+      isNew: false,
+      hasDRT: true,
+    },
+    languages: ["Português", "Nheengatu"],
+    stats: {
+      portfolioViews: 1450,
+      bookingRate: 82,
     },
   },
 ];

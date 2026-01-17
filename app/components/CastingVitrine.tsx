@@ -14,14 +14,6 @@ import Header from "./Header";
 import TalentCard from "./TalentCard";
 import AdvancedFilters from "./AdvancedFilters";
 import Pagination from "./Pagination";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../../components/ui/select";
-import { LayoutGrid } from "lucide-react";
 
 // Lazy load TalentDetailSheet for better performance
 const TalentDetailSheet = lazy(() => import("./TalentDetailSheet"));
@@ -40,59 +32,29 @@ export default function CastingVitrine() {
   );
   const [isDetailSheetOpen, setIsDetailSheetOpen] = useState(false);
   const [itemsPerPage, setItemsPerPage] = useState(12);
-  const [selectedColumns, setSelectedColumns] = useState<number | null>(null);
 
-  // Calculate items per page based on screen size and selected columns
+  // Calculate items per page based on screen size
   useEffect(() => {
     const updateItemsPerPage = () => {
       const width = window.innerWidth;
-      const columns = selectedColumns || getDefaultColumns(width);
-
       if (width < 640) {
-        setItemsPerPage(columns * 8); // 8 rows for mobile
+        setItemsPerPage(8);
       } else if (width < 1024) {
-        setItemsPerPage(columns * 6); // 6 rows for tablet
+        setItemsPerPage(12);
       } else {
-        setItemsPerPage(columns * 5); // 5 rows for desktop
+        setItemsPerPage(20);
       }
-    };
-
-    const getDefaultColumns = (width: number) => {
-      if (width < 640) return 1;
-      if (width < 1024) return 2;
-      if (width < 1280) return 3;
-      return 4;
     };
 
     updateItemsPerPage();
     window.addEventListener("resize", updateItemsPerPage);
     return () => window.removeEventListener("resize", updateItemsPerPage);
-  }, [selectedColumns]);
+  }, []);
 
   // Reset to page 1 when itemsPerPage changes
   useEffect(() => {
     setCurrentPage(1);
   }, [itemsPerPage]);
-
-  // Get grid classes based on selected columns
-  const getGridClasses = () => {
-    if (selectedColumns === null) {
-      return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4";
-    }
-
-    switch (selectedColumns) {
-      case 1:
-        return "grid-cols-1";
-      case 2:
-        return "grid-cols-1 sm:grid-cols-2";
-      case 3:
-        return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
-      case 4:
-        return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4";
-      default:
-        return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4";
-    }
-  };
 
   // Filter talents based on search criteria
   const filteredTalents = useMemo(() => {
@@ -165,7 +127,7 @@ export default function CastingVitrine() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-gradient-to-br from-[#F8F7FA] via-white to-[#F3F1F8]">
       {/* Professional Header */}
       <Header
         totalTalents={talentos.length}
@@ -183,144 +145,63 @@ export default function CastingVitrine() {
         totalResults={filteredTalents.length}
       />
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="space-y-6 sm:space-y-8">
-
-          {/* Results Header */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2 sm:space-x-3">
-              <div className="h-7 w-7 sm:h-8 sm:w-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-semibold text-xs sm:text-sm">
-                  {filteredTalents.length}
-                </span>
-              </div>
-              <div>
-                <p className="text-base sm:text-lg font-semibold text-slate-900">
-                  {filteredTalents.length} talents found
-                </p>
-                {totalPages > 1 && (
-                  <p className="text-xs sm:text-sm text-slate-500">
-                    Page {currentPage} of {totalPages}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            {/* Column Selector */}
-            <div className="flex items-center space-x-2">
-              <LayoutGrid className="h-4 w-4 text-slate-500" />
-              <Select
-                value={selectedColumns?.toString() || "auto"}
-                onValueChange={(value) => {
-                  if (value === "auto") {
-                    setSelectedColumns(null);
-                  } else {
-                    setSelectedColumns(Number.parseInt(value));
-                  }
-                }}
+      {/* Main Content - com padding-top para não ficar atrás do header/filters em mobile */}
+      <main className="container mx-auto px-8 py-10">
+        {/* Talent Grid */}
+        {currentTalents.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {currentTalents.map((talent) => (
+              <TalentCard
+                key={talent.id}
+                talent={talent}
+                onClick={handleTalentClick}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-20">
+            <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-12 max-w-md mx-auto border border-gray-200">
+              <p className="text-gray-500 mb-2">Nenhum talento encontrado</p>
+              <p className="text-gray-400 mb-6">Tente ajustar os filtros</p>
+              <button
+                onClick={handleClearFilters}
+                className="px-6 py-2.5 bg-gradient-to-r from-figma-light to-figma-primary text-white rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300 font-medium"
               >
-                <SelectTrigger className="w-20 h-8 text-xs border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg bg-white/50 backdrop-blur-sm">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="rounded-lg border-slate-200">
-                  <SelectItem value="auto">Auto</SelectItem>
-                  <SelectItem value="1">1</SelectItem>
-                  <SelectItem value="2">2</SelectItem>
-                  <SelectItem value="3">3</SelectItem>
-                  <SelectItem value="4">4</SelectItem>
-                </SelectContent>
-              </Select>
+                Limpar filtros
+              </button>
             </div>
           </div>
+        )}
 
-                  {/* Talent Grid */}
-                  {currentTalents.length > 0 ? (
-                    <div 
-                      className={`grid ${getGridClasses()} gap-4 sm:gap-6 stagger-animation`}
-                      style={{
-                        gridTemplateRows: 'repeat(auto-fit, minmax(500px, 1fr))'
-                      }}
-                    >
-                      {currentTalents.map((talent, index) => (
-                        <div
-                          key={talent.id}
-                          className="h-full animate-fade-in-scale hover-lift-enhanced"
-                          style={{
-                            animationDelay: `${index * 150}ms`,
-                            animationFillMode: "both",
-                          }}
-                        >
-                          <TalentCard 
-                            talent={talent} 
-                            onClick={handleTalentClick} 
-                            isPriority={index === 0}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-center py-12 sm:py-16 fade-in-up">
-                      <div className="mx-auto w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-r from-slate-100 to-slate-200 rounded-full flex items-center justify-center mb-4 sm:mb-6 pulse-glow">
-                        <svg
-                          className="w-10 h-10 sm:w-12 sm:h-12 text-slate-400"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={1.5}
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                          />
-                        </svg>
-                      </div>
-                      <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
-                        No talents found
-                      </h3>
-                      <p className="text-sm sm:text-base text-slate-500 mb-4 sm:mb-6 px-4">
-                        Try adjusting the filters to find more talents.
-                      </p>
-                      <button
-                        onClick={handleClearFilters}
-                        className="px-4 sm:px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 hover-scale transition-all duration-200 font-medium text-sm sm:text-base"
-                      >
-                        Clear filters
-                      </button>
-                    </div>
-                  )}
-
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="flex justify-center pt-6 sm:pt-8">
-              <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-              />
-            </div>
-          )}
-
-          {/* Detail Sheet */}
-          <Suspense
-            fallback={
-              <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-                <div className="bg-white rounded-lg p-6 animate-pulse">
-                  <div className="w-8 h-8 bg-slate-200 rounded-full mx-auto mb-4"></div>
-                  <div className="text-slate-600">Loading details...</div>
-                </div>
-              </div>
-            }
-          >
-            <TalentDetailSheet
-              talent={selectedTalent}
-              isOpen={isDetailSheetOpen}
-              onClose={handleDetailSheetClose}
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex justify-center pt-10">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
             />
-          </Suspense>
-        </div>
-      </div>
+          </div>
+        )}
+      </main>
+
+      {/* Detail Sheet */}
+      <Suspense
+        fallback={
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+            <div className="bg-white rounded-2xl p-8 shadow-xl">
+              <div className="w-10 h-10 border-4 border-figma-primary/30 border-t-figma-primary rounded-full mx-auto mb-4 animate-spin"></div>
+              <div className="text-gray-600">Carregando detalhes...</div>
+            </div>
+          </div>
+        }
+      >
+        <TalentDetailSheet
+          talent={selectedTalent}
+          isOpen={isDetailSheetOpen}
+          onClose={handleDetailSheetClose}
+        />
+      </Suspense>
     </div>
   );
 }
